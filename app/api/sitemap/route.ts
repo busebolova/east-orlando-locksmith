@@ -1,16 +1,18 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getData } from '@/lib/data';
+
+type ChangeFreq = 'weekly' | 'monthly' | 'yearly' | 'daily';
 
 export async function GET() {
   const data = await getData();
   const now = new Date().toISOString();
 
-  const urls = data.pages
+  const urls: Array<{ loc: string; lastmod: string; changefreq: ChangeFreq; priority: number }> = data.pages
     .filter((p) => p.published)
     .map((p) => ({
       loc: `https://eastorlandolocksmith.com/${p.slug === 'index' ? '' : p.slug}`,
       lastmod: now,
-      changefreq: 'weekly' as const,
+      changefreq: 'weekly' as ChangeFreq,
       priority: p.type === 'homepage' ? 1.0 : p.type === 'service' ? 0.8 : 0.6,
     }));
 
@@ -20,7 +22,7 @@ export async function GET() {
       urls.push({
         loc: `https://eastorlandolocksmith.com/blog/${p.slug}`,
         lastmod: p.date ? new Date(p.date).toISOString() : now,
-        changefreq: 'monthly' as const,
+        changefreq: 'monthly' as ChangeFreq,
         priority: 0.5,
       });
     });
