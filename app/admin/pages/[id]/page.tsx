@@ -1,6 +1,6 @@
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
-import { getData, savePage } from '@/lib/data';
+import { getData, getPage, savePage } from '@/lib/data';
 
 export default async function EditPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -15,7 +15,9 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
     const description = formData.get('description') as string;
     const published = formData.get('published') === 'on';
 
-    await savePage(page.slug, { title, description, published });
+    const currentPage = await getPage(page.slug);
+    if (!currentPage) throw new Error('Page not found');
+    await savePage(currentPage.slug, { title, description, published });
     redirect('/admin/pages');
   }
 

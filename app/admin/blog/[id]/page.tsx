@@ -1,17 +1,41 @@
+'use client';
+
 import Link from 'next/link';
 import { getBlogPost, saveBlogPost, getData } from '@/lib/data';
 import { notFound, redirect } from 'next/navigation';
+import { useEffect, useRef, useActionState, useState } from 'react';
+import AIContentGenerator from '@/components/AIContentGenerator';
 
-export default async function EditBlogPostPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const post = await getBlogPost(id);
+export default function EditBlogPostPage({ params }: { params: Promise<{ id: string }> }) {
+  const [post, setPost] = useState<{
+    id: string; slug: string; title: string; description: string;
+    content: string; category: string; tags: string[];
+    published: boolean; date: string;
+  } | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!post) {
-    notFound();
-  }
+  const titleRef = useRef<HTMLInputElement>(null);
+  const descRef = useRef<HTMLTextAreaElement>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
 
-  async function handleUpdate(formData: FormData) {
+  useEffect(() => {
+    params.then(async ({ id }) => {
+      const { getBlogPost } = await import('@/lib/data');
+      const p = await getBlogPost(id);
+      if (!p) {
+        notFound();
+        return;
+      }
+      setPost(p);
+      setLoading(false);
+    });
+  }, [params]);
+
+  async function handleUpdate(_prev: unknown, formData: FormData) {
     'use server';
+    const id = formData.get('postId') as string;
+    if (!id) throw new Error('Missing postId');
+
     const title = formData.get('title') as string;
     const description = formData.get('description') as string;
     const content = formData.get('content') as string;
@@ -39,6 +63,37 @@ export default async function EditBlogPostPage({ params }: { params: Promise<{ i
     redirect('/admin/blog');
   }
 
+  const [, formAction] = useActionState(handleUpdate, null);
+
+  const handleAIContent = (content: string, title?: string, description?: string) => {
+    if (title && titleRef.current) {
+      titleRef.current.value = title;
+    }
+    if (description && descRef.current) {
+      descRef.current.value = description;
+    }
+    if (contentRef.current) {
+      contentRef.current.value = content;
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="page-content">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (!post) {
+    return (
+      <div className="page-content">
+        <p>Post not found.</p>
+        <Link href="/admin/blog" className="btn btn-secondary">← Back</Link>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="topbar-admin">
@@ -48,10 +103,11 @@ export default async function EditBlogPostPage({ params }: { params: Promise<{ i
       <div className="page-content">
         <div className="card">
           <div className="card-body">
-            <form action={handleUpdate}>
+            <form action={formAction}>
+              <input type="hidden" name="postId" value={post.id} />
               <div className="form-group">
                 <label>Title</label>
-                <input type="text" name="title" className="form-control" defaultValue={post.title} required />
+                <input ref={titleRef} type="text" name="title" className="form-control" defaultValue={post.title} required />
               </div>
 
               <div className="form-row">
@@ -84,12 +140,14 @@ export default async function EditBlogPostPage({ params }: { params: Promise<{ i
 
               <div className="form-group">
                 <label>Meta Description (SEO)</label>
-                <textarea name="description" className="form-control" rows={2} defaultValue={post.description} required />
+                <textarea ref={descRef} name="description" className="form-control" rows={2} defaultValue={post.description} required />
               </div>
+
+              <AIContentGenerator onContentGenerated={handleAIContent} initialPrompt="" />
 
               <div className="form-group">
                 <label>Content (HTML)</label>
-                <textarea name="content" className="form-control" rows={20} defaultValue={post.content} required />
+                <textarea ref={contentRef} name="content" className="form-control" rows={20} defaultValue={post.content} required />
               </div>
 
               <div className="form-row">

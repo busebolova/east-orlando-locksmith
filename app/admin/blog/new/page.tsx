@@ -1,7 +1,10 @@
+'use client';
+
 import Link from 'next/link';
-import { getData } from '@/lib/data';
 import { redirect } from 'next/navigation';
 import { createBlogPost } from '@/lib/data';
+import { useRef, useActionState } from 'react';
+import AIContentGenerator from '@/components/AIContentGenerator';
 
 function slugify(text: string): string {
   return text
@@ -12,7 +15,11 @@ function slugify(text: string): string {
 }
 
 export default function NewBlogPostPage() {
-  async function handleCreate(formData: FormData) {
+  const titleRef = useRef<HTMLInputElement>(null);
+  const descRef = useRef<HTMLTextAreaElement>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+
+  async function handleCreate(_prev: unknown, formData: FormData) {
     'use server';
 
     const title = formData.get('title') as string;
@@ -41,6 +48,20 @@ export default function NewBlogPostPage() {
     redirect('/admin/blog');
   }
 
+  const [, formAction] = useActionState(handleCreate, null);
+
+  const handleAIContent = (content: string, title?: string, description?: string) => {
+    if (title && titleRef.current) {
+      titleRef.current.value = title;
+    }
+    if (description && descRef.current) {
+      descRef.current.value = description;
+    }
+    if (contentRef.current) {
+      contentRef.current.value = content;
+    }
+  };
+
   return (
     <>
       <div className="topbar-admin">
@@ -50,10 +71,10 @@ export default function NewBlogPostPage() {
       <div className="page-content">
         <div className="card">
           <div className="card-body">
-            <form action={handleCreate}>
+            <form action={formAction}>
               <div className="form-group">
                 <label>Title</label>
-                <input type="text" name="title" className="form-control" placeholder="e.g., Emergency Lockout Tips for Orlando" required />
+                <input ref={titleRef} type="text" name="title" className="form-control" placeholder="e.g., Emergency Lockout Tips for Orlando" required />
               </div>
 
               <div className="form-row">
@@ -75,12 +96,14 @@ export default function NewBlogPostPage() {
 
               <div className="form-group">
                 <label>Meta Description (for SEO)</label>
-                <textarea name="description" className="form-control" rows={2} placeholder="Brief description for search results..." required />
+                <textarea ref={descRef} name="description" className="form-control" rows={2} placeholder="Brief description for search results..." required />
               </div>
+
+              <AIContentGenerator onContentGenerated={handleAIContent} initialPrompt="" />
 
               <div className="form-group">
                 <label>Content (HTML)</label>
-                <textarea name="content" className="form-control" rows={15} placeholder="<p>Write your blog content in HTML...</p>" required />
+                <textarea ref={contentRef} name="content" className="form-control" rows={15} placeholder="<p>Write your blog content in HTML...</p>" required />
               </div>
 
               <div className="form-row">
