@@ -1,0 +1,20 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/index" },
+    { "source": "/seo-landing-pages", "destination": "/seo-index" },
+    { "source": "/emergency-lockout", "destination": "/pages/service-emergency-lockout" },
+    { "source": "/winter-park-locksmith", "destination": "/pages/location-winter-park" },
+    { "source": "/winter-park-emergency-lockout", "destination": "/pages/winter-park-emergency-lockout" },
+    { "source": "/ford-locksmith", "destination": "/pages/brand-ford-locksmith" },
+    { "source": "/ford-key-programming", "destination": "/pages/ford-key-programming" },
+    { "source": "/locksmith-32801", "destination": "/pages/zip-32801-locksmith" },
+    { "source": "/car-key-replacement-32803", "destination": "/pages/zip-32803-car-key-replacement" },
+    { "source": "/blog", "destination": "/pages/blog" },
+    { "source": "/orlando-lockout-guide", "destination": "/pages/blog-orlando-lockout-guide" },
+    { "source": "/blog/baldwin-park-lockout", "destination": "/pages/blog/baldwin-park-emergency-lockout" },
+    { "source": "/blog/toyota-key-replacement", "destination": "/pages/blog/toyota-key-replacement" },
+    { "source": "/blog/winter-park-ford-key-programming", "destination": "/pages/blog/winter-park-ford-key-programming" }
+  ],
+  "trailingSlash": false
+}
