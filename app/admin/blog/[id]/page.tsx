@@ -1,7 +1,7 @@
 import { getBlogPost } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import BlogForm from '@/components/BlogForm';
-import { updatePost } from './actions';
+import { updatePost } from '../actions';
 
 export default async function EditBlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
