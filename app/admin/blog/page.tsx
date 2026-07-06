@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getData, saveData } from '@/lib/data';
+import DeleteBlogForm from './DeleteBlogForm';
 
 async function handleDelete(formData: FormData) {
   'use server';
@@ -57,14 +58,7 @@ export default async function AdminBlogPage() {
                     <td>
                       <div style={{ display: 'flex', gap: 4 }}>
                         <Link href={`/admin/blog/${post.id}`} className="btn btn-sm btn-secondary">Edit</Link>
-                        <form action={handleDelete} onSubmit={(e) => {
-                          if (!confirm('Are you sure you want to delete this post? This cannot be undone.')) {
-                            e.preventDefault();
-                          }
-                        }}>
-                          <input type="hidden" name="slug" value={post.id} />
-                          <button type="submit" className="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                        <DeleteBlogForm postId={post.id} formAction={handleDelete} />
                       </div>
                     </td>
                   </tr>

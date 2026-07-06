@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 
-interface AIContentGeneratorProps {
+interface Props {
   onContentGenerated: (content: string, title?: string, description?: string) => void;
   initialPrompt?: string;
 }
 
-export default function AIContentGenerator({ onContentGenerated, initialPrompt = '' }: AIContentGeneratorProps) {
+export default function AIContentGenerator({ onContentGenerated, initialPrompt = '' }: Props) {
   const [prompt, setPrompt] = useState(initialPrompt);
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState('');
@@ -91,6 +91,7 @@ DESCRIPTION: <meta description>
           style={{ flex: 1 }}
         />
         <button
+          type="button"
           className="btn btn-primary"
           onClick={handleGenerate}
           disabled={generating || !prompt.trim()}
