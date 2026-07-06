@@ -15,7 +15,7 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
     const description = formData.get('description') as string;
     const published = formData.get('published') === 'on';
 
-    const currentPage = await getPage(page.slug);
+    const currentPage = await getPage(page!.slug);
     if (!currentPage) throw new Error('Page not found');
     await savePage(currentPage.slug, { title, description, published });
     redirect('/admin/pages');
