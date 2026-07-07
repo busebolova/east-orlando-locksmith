@@ -2,6 +2,8 @@ import { getData } from '@/lib/data';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
+export const revalidate = 60;
+
 const ICONS: Record<string, string> = {
   // Circle-icon variants (inside a circle `<circle cx="12" cy="12" r="8.5"/>`)
   'circle-icon clock': '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3.5 2"/>',

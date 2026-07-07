@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { renderContent } from '@/lib/content-renderer';
 
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const data = await getData();
   return data.blogPosts.map(p => ({ slug: p.slug }));

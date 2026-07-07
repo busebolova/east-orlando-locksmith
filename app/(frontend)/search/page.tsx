@@ -2,6 +2,8 @@ import { getData } from '@/lib/data';
 import { Metadata } from 'next';
 import { SearchClient } from './SearchClient';
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: 'Search - East Orlando Locksmith',
   description: 'Search our services, locations, and resources.',

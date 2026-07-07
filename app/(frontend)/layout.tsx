@@ -1,6 +1,8 @@
 import { getData } from '@/lib/data';
 import FrontendLayoutClient from './_components/FrontendLayoutClient';
 
+export const revalidate = 60;
+
 export default async function FrontendLayout({ children }: { children: React.ReactNode }) {
   const data = await getData();
 
