@@ -485,9 +485,43 @@ textarea.form-control {
   color: #e6a329;
 }
 
-/* fix for admin body padding overriding frontend header */
-body:has(.site-header) {
+/* Fix body padding from styles.css — frontend pages keep the original 142px padding (removed body:has(.site-header) override)
+   Only admin pages override to remove padding */
+body:has(.admin-layout) {
   padding-top: 0;
+}
+
+/* SEO hero description text — full width, no line clamp so all text is visible */
+.seo-hero__copy > p:not(.eyebrow) {
+  -webkit-line-clamp: unset;
+  max-width: 100%;
+}
+
+/* SEO proof strip icon alignment fix — center icon with text */
+.seo-proof-strip div {
+  align-items: center;
+}
+
+.seo-proof-strip strong,
+.seo-proof-strip small {
+  white-space: nowrap;
+}
+
+/* SEO detail list — text wrapping fix */
+.detail-list li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detail-list li:hover {
+  white-space: normal;
+  overflow: visible;
+}
+
+/* SEO trust badges — single line text */
+.trust-badges span {
+  white-space: nowrap;
 }
 
 /* Empty State */
@@ -537,13 +571,71 @@ body:has(.site-header) {
 /* Responsive */
 @media (max-width: 768px) {
   .sidebar {
-    width: 100%;
-    position: relative;
-    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    width: min(300px, 85vw);
+    z-index: 60;
+    transform: translateX(-100%);
+    transition: transform 220ms ease;
+  }
+
+  .sidebar.sidebar--open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 55;
+  }
+
+  .sidebar-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    top: 12px;
+    left: 13px;
+    z-index: 65;
+    background: var(--navy);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .sidebar-toggle span {
+    display: block;
+    width: 22px;
+    height: 2.5px;
+    background: white;
+    border-radius: 2px;
+    transition: transform 220ms ease, opacity 220ms ease;
+  }
+
+  .sidebar-toggle.open span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+  }
+
+  .sidebar-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .sidebar-toggle.open span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
   }
 
   .main-content {
     margin-left: 0;
+    padding-top: 56px;
   }
 
   .form-row {
@@ -556,6 +648,13 @@ body:has(.site-header) {
 
   .quick-actions {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar-toggle,
+  .sidebar-overlay {
+    display: none;
   }
 }
 

@@ -1,6 +1,6 @@
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
-import { getData, getPage, savePage } from '@/lib/data';
+import { getData, savePage } from '@/lib/data';
 import PageEditorClient from '../PageEditorClient';
 import PageSectionsEditor from '@/components/PageSectionsEditor';
 
@@ -27,9 +27,7 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
       }
     } catch { /* invalid JSON, ignore */ }
 
-    const currentPage = await getPage(page!.slug);
-    if (!currentPage) throw new Error('Page not found');
-    await savePage(currentPage.slug, { title, description, content, seoKeywords, published, sections });
+    await savePage(page!.slug, { title, description, content, seoKeywords, published, sections });
     redirect('/admin/pages');
   }
 
@@ -78,7 +76,12 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
                 <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 16 }}>
                   Her sayfanın ön yüzde görünen bölümlerini buradan düzenleyin. Boş bırakılan alanlar varsayılan içerikle gösterilir.
                 </p>
-                <PageSectionsEditor initialSections={page.sections} />
+                <PageSectionsEditor
+                  initialSections={page.sections}
+                  pageTitle={page.title}
+                  pageService={page.service}
+                  pageLocation={page.location}
+                />
               </div>
 
               {page.location && (

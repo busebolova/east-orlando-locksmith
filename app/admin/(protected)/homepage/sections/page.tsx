@@ -20,7 +20,7 @@ export default async function HomepageSectionsPage() {
   return (
     <>
       <div className="topbar-admin">
-        <h2>Homepage Sections</h2>
+        <h2>Home Page</h2>
         <div style={{ display: 'flex', gap: 8 }}>
           <Link href="/" className="btn btn-sm btn-secondary" target="_blank">View Site</Link>
           <Link href="/admin" className="btn btn-sm btn-secondary">← Dashboard</Link>

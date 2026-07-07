@@ -98,12 +98,11 @@ export default function BlogForm({
         <textarea name="description" className="form-control" rows={2} defaultValue={defaultDescription} placeholder="Brief description for search results..." required />
       </div>
 
-      <AIContentGenerator onContentGenerated={handleAIContent} initialPrompt="" />
-
       <div className="form-group">
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
           <label style={{ margin: 0, fontWeight: 600 }}>Blog Icerigi</label>
         </div>
+        <AIContentGenerator onContentGenerated={handleAIContent} initialPrompt="" />
         <RichTextEditor
           value={htmlContent}
           onChange={(html) => setHtmlContent(html)}

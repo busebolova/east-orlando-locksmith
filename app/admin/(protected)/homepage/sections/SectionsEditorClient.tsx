@@ -361,6 +361,18 @@ export default function SectionsEditorClient({ initialData }: Props) {
             {renderField('Pill Text (first character = icon/emoji)', data.pill, v => { setData(prev => ({ ...prev, pill: v })) }, { placeholder: '⚡ 24/7 Emergency Locksmith' })}
             {renderField('Heading (use <span> for gold text)', data.heading, v => { setData(prev => ({ ...prev, heading: v })) }, { placeholder: "Orlando's Most <span>Trusted</span> Locksmith", rows: 2 })}
             {renderField('Hero Image Src', data.heroImage.src, v => { setData(prev => ({ ...prev, heroImage: { ...prev.heroImage, src: v } })) }, { placeholder: '/assets/hero-locksmith.png', mono: true })}
+            <div style={{ marginBottom: 12 }}>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 3 }}>Upload Hero Image</label>
+              <input type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" onChange={async (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                const fd = new FormData();
+                fd.append('file', file);
+                const res = await fetch('/api/assets', { method: 'POST', body: fd });
+                const data = await res.json();
+                if (data.success) setData(prev => ({ ...prev, heroImage: { ...prev.heroImage, src: data.url } }));
+              }} style={{ fontSize: 13 }} />
+            </div>
             {renderField('Hero Image Alt', data.heroImage.alt, v => { setData(prev => ({ ...prev, heroImage: { ...prev.heroImage, alt: v } })) }, { placeholder: 'Locksmith repairing a door lock at night' })}
           </div>
         )}

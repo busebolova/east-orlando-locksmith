@@ -108,6 +108,20 @@ export default function HeaderSettingsClient({ headerLogo, headerLogoWidth, head
             </small>
           </div>
 
+          <div className="form-group">
+            <label>Or Enter Logo URL</label>
+            <input
+              type="url"
+              className="form-control"
+              placeholder="https://example.com/logo.png"
+              value={logo}
+              onChange={e => setLogo(e.target.value)}
+            />
+            <small style={{ fontSize: 11, color: '#9ca3af', display: 'block', marginTop: 4 }}>
+              Paste an external image URL, or upload above to auto-fill this field.
+            </small>
+          </div>
+
           <input type="hidden" name="headerLogo" value={logo} />
 
           <div className="form-row">
@@ -146,6 +160,20 @@ export default function HeaderSettingsClient({ headerLogo, headerLogoWidth, head
           <div className="form-group">
             <label>Upload New Favicon</label>
             <input type="file" accept="image/png,image/x-icon,image/vnd.microsoft.icon" onChange={handleFaviconUpload} style={{ fontSize: 13 }} />
+          </div>
+
+          <div className="form-group">
+            <label>Or Enter Favicon URL</label>
+            <input
+              type="url"
+              className="form-control"
+              placeholder="https://example.com/favicon.ico"
+              value={fav}
+              onChange={e => setFav(e.target.value)}
+            />
+            <small style={{ fontSize: 11, color: '#9ca3af', display: 'block', marginTop: 4 }}>
+              Paste an external favicon URL, or upload above to auto-fill this field.
+            </small>
           </div>
 
           <input type="hidden" name="favicon" value={fav} />

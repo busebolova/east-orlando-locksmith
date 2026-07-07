@@ -50,6 +50,35 @@ export default function MediaManagerClient() {
     }
   }
 
+  const [importUrl, setImportUrl] = useState('');
+  const [importing, setImporting] = useState(false);
+
+  async function handleImportUrl() {
+    const url = importUrl.trim();
+    if (!url) return;
+    setImporting(true);
+    setMessage(null);
+    try {
+      const res = await fetch('/api/assets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setMessage({ type: 'success', text: `Imported: ${data.fileName}` });
+        setImportUrl('');
+        await loadImages();
+      } else {
+        setMessage({ type: 'error', text: data.error || 'Import failed' });
+      }
+    } catch {
+      setMessage({ type: 'error', text: 'Import failed' });
+    } finally {
+      setImporting(false);
+    }
+  }
+
   async function handleDelete(url: string) {
     if (!confirm('Delete this image?')) return;
     try {
@@ -99,6 +128,30 @@ export default function MediaManagerClient() {
           </label>
           <p style={{ marginTop: 8, fontSize: 12, color: 'var(--gray-500)' }}>
             Allowed: PNG, JPG, GIF, WebP, SVG — Max 5MB
+          </p>
+        </div>
+      </div>
+
+      <div className="card" style={{ marginBottom: 24 }}>
+        <div className="card-header">
+          <h3>Import from URL</h3>
+        </div>
+        <div className="card-body">
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <input
+              type="url"
+              className="form-control"
+              placeholder="https://example.com/image.png"
+              value={importUrl}
+              onChange={e => setImportUrl(e.target.value)}
+              style={{ flex: 1 }}
+            />
+            <button className="btn btn-primary" onClick={handleImportUrl} disabled={importing || !importUrl.trim()}>
+              {importing ? 'Importing...' : 'Import'}
+            </button>
+          </div>
+          <p style={{ marginTop: 8, fontSize: 12, color: 'var(--gray-500)' }}>
+            Paste an external image URL to download it to your media library.
           </p>
         </div>
       </div>
