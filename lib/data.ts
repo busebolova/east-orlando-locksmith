@@ -1,9 +1,17 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { syncToGitHub } from '@/lib/github-sync';
+import { syncToGitHub, readFromGitHub, writeToGitHub } from '@/lib/github-sync';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const DATA_FILE = path.join(DATA_DIR, 'site-content.json');
+
+/** Vercel's production filesystem is read-only — detect it via EROFS-prone env. */
+function isReadOnlyFs(): boolean {
+  return (
+    process.env.VERCEL === '1' &&
+    process.env.NODE_ENV === 'production'
+  );
+}
 
 export type PageFaqItem = {
   question: string;
@@ -180,13 +188,33 @@ let cache: SiteContent | null = null;
 
 export async function getData(): Promise<SiteContent> {
   if (cache) return cache;
+
+  if (isReadOnlyFs()) {
+    // Vercel production — read from GitHub API instead
+    const raw = await readFromGitHub();
+    if (raw) {
+      cache = JSON.parse(raw);
+      return cache!;
+    }
+    // fall through to local read (shouldn't happen on Vercel, but be safe)
+  }
+
   const raw = await fs.readFile(DATA_FILE, 'utf-8');
   cache = JSON.parse(raw);
   return cache!;
 }
 
 export async function saveData(data: SiteContent): Promise<void> {
-  await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8');
+  const json = JSON.stringify(data, null, 2);
+
+  if (isReadOnlyFs()) {
+    // Vercel production — can't write local file, push directly to GitHub
+    await writeToGitHub(json);
+    cache = data;
+    return;
+  }
+
+  await fs.writeFile(DATA_FILE, json, 'utf-8');
   cache = data;
   syncToGitHub().catch(() => {});
 }
