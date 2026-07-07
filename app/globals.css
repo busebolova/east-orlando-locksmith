@@ -28,6 +28,11 @@ body {
   min-height: 100vh;
 }
 
+/* Override body padding-top from styles.css for admin pages */
+body:has(.admin-layout) {
+  padding-top: 0;
+}
+
 /* Admin Layout */
 .admin-layout {
   display: flex;

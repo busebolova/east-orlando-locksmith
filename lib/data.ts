@@ -10,6 +10,7 @@ export type Page = {
   slug: string;
   type: string;
   description: string;
+  content?: string;
   location?: string;
   service?: string;
   brand?: string;

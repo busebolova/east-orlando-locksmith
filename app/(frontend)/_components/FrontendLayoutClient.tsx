@@ -94,7 +94,7 @@ export default function FrontendLayoutClient({
             <span></span>
           </button>
 
-          <div className={`nav-links ${menuOpen ? 'open' : ''}`} id="navLinks">
+          <div className={`nav-links ${menuOpen ? 'is-open' : ''}`} id="navLinks">
             {navGroups.map(([groupName, items]) => (
               <div key={groupName} className="nav-item">
                 <a href={`/${items[0]?.slug || '#'}`}>
@@ -110,9 +110,9 @@ export default function FrontendLayoutClient({
               </div>
             ))}
 
-            <a className="nav-phone" href={`tel:${phoneRaw}`}>
+            <a className="nav-phone btn btn-gold" href={`tel:${phoneRaw}`}>
               <span className="header-phone" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6 19.7 19.7 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.4 1.4 1 2.8 1.7 4a.5.5 0 0 1-.2.7l-1.3 1.2a16 16 0 0 0 6 6l1.2-1.2a.5.5 0 0 1 .7-.2c1.2.7 2.5 1.3 4 1.7a2 2 0 0 1 1.6 2z"></path></svg>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-3.2c.3-.4.7-.5 1.1-.3 1.2.5 2.5.8 3.8.9.5 0 .9.4.9.9v3.3c0 .5-.4 1-.9 1C9.4 20.5 3.5 14.6 3 6.7c0-.5.4-.9.9-.9h3.3c.5 0 .9.4.9.9.1 1.3.4 2.6.9 3.8.1.4 0 .9-.3 1.1L6.6 10.8Z"/></svg>
               </span>
               {phone}
             </a>
@@ -122,35 +122,36 @@ export default function FrontendLayoutClient({
 
       <main>{children}</main>
 
-      <footer className="site-footer" style={{ background: '#071321', color: 'rgba(255,255,255,0.8)', padding: '48px 0 24px' }}>
-        <div style={{ width: 'min(1320px, calc(100% - 64px))', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 40, marginBottom: 32 }}>
-            <div>
-              <img src="/assets/logo-crop.png" alt={siteName} style={{ height: 48, marginBottom: 16, filter: 'brightness(0) invert(1)' }} />
-              <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(255,255,255,0.65)' }}>{footerDesc}</p>
-            </div>
-            <div>
-              <h4 style={{ color: '#e6a329', fontSize: 14, fontWeight: 700, marginBottom: 12, textTransform: 'uppercase', letterSpacing: 1 }}>Services</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {(navigation.services || []).map((item) => (
-                  <Link key={item.slug} href={`/${item.slug}`} style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', textDecoration: 'none' }}>
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h4 style={{ color: '#e6a329', fontSize: 14, fontWeight: 700, marginBottom: 12, textTransform: 'uppercase', letterSpacing: 1 }}>Contact</h4>
-              <div style={{ fontSize: 13, lineHeight: 2, color: 'rgba(255,255,255,0.65)' }}>
-                <div>{address}</div>
-                <div><a href={`tel:${phoneRaw}`} style={{ color: '#e6a329', textDecoration: 'none' }}>{phone}</a></div>
-                <div>{hours}</div>
-              </div>
-            </div>
+      <footer className="site-footer">
+        <div className="footer-grid">
+          <div>
+            <img src="/assets/logo-crop.png" alt={siteName} />
+            <p>{footerDesc}</p>
+            <a className="footer-phone" href={`tel:${phoneRaw}`}>{phone}</a>
           </div>
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 16, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>
-            &copy; {copyright}
-          </div>
+          <nav aria-label="Footer services">
+            <h3>Services</h3>
+            {(navigation.services || []).map((item) => (
+              <Link key={item.slug} href={`/${item.slug}`}>{item.label}</Link>
+            ))}
+          </nav>
+          <nav aria-label="Footer locations">
+            <h3>Locations</h3>
+            {(navigation.locations || []).slice(0, 4).map((item) => (
+              <Link key={item.slug} href={`/${item.slug}`}>{item.label}</Link>
+            ))}
+          </nav>
+          <nav aria-label="Footer company">
+            <h3>Company</h3>
+            <Link href="/seo-index">Landing Pages</Link>
+            <Link href="/blog">Blog</Link>
+            <a href={`tel:${phoneRaw}`}>Get Free Quote</a>
+            <div className="social-links"><a href="#" aria-label="Google profile">G</a><a href="#" aria-label="Yelp profile">Y</a></div>
+          </nav>
+        </div>
+        <div className="footer-bottom">
+          <span>{siteName} · {address}</span>
+          <span>&copy; {copyright}</span>
         </div>
       </footer>
     </>

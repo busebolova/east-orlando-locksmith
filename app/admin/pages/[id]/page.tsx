@@ -1,6 +1,7 @@
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { getData, getPage, savePage } from '@/lib/data';
+import PageEditorClient from '../PageEditorClient';
 
 export default async function EditPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -13,11 +14,12 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
     'use server';
     const title = formData.get('title') as string;
     const description = formData.get('description') as string;
+    const content = formData.get('content') as string;
     const published = formData.get('published') === 'on';
 
     const currentPage = await getPage(page!.slug);
     if (!currentPage) throw new Error('Page not found');
-    await savePage(currentPage.slug, { title, description, published });
+    await savePage(currentPage.slug, { title, description, content, published });
     redirect('/admin/pages');
   }
 
@@ -51,6 +53,13 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
                 <label>Meta Description (SEO)</label>
                 <textarea name="description" className="form-control" rows={3} defaultValue={page.description} required />
               </div>
+
+              <PageEditorClient
+                initialContent={page.content || ''}
+                initialTitle={page.title}
+                pageService={page.service}
+                pageLocation={page.location}
+              />
 
               {page.location && (
                 <div className="form-row">
@@ -87,10 +96,6 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
               </div>
             </form>
           </div>
-        </div>
-
-        <div style={{ marginTop: 16, padding: 16, background: '#fef3c7', borderRadius: 8, border: '1px solid #fde68a', fontSize: 13, color: '#92400e' }}>
-          <strong>Note:</strong> Page content is currently managed through the static HTML files. The admin panel controls page metadata (title, description, publish status). Full content editing from the panel requires the Next.js dynamic renderer to be active.
         </div>
       </div>
     </>
