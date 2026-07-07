@@ -20,8 +20,7 @@ export default async function FrontendHomePage() {
         background: 'linear-gradient(135deg, #071321 0%, #0f2940 100%)',
         color: 'white',
         padding: '80px 32px',
-        textAlign: 'center',
-        minHeight: 0
+        textAlign: 'center'
       }}>
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
           <h1 style={{ fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.15 }}>
