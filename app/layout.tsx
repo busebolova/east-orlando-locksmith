@@ -36,6 +36,32 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             }} />
           </>
         )}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Locksmith",
+            "name": "East Orlando Locksmith",
+            "image": "https://eastorlandolocksmith.com/assets/hero-locksmith.png",
+            "telephone": "+14075555625",
+            "email": "info@eastorlandolocksmith.com",
+            "description": "24/7 emergency locksmith service in East Orlando. Car key replacement, home lockouts, rekeying, and commercial locksmith services.",
+            "areaServed": ["Orlando", "Winter Park", "Oviedo", "Maitland", "Casselberry", "Altamonte Springs", "Baldwin Park", "Waterford Lakes"],
+            "openingHours": "Mo-Su 00:00-23:59",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Orlando",
+              "addressRegion": "FL",
+              "addressCountry": "US"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5.0",
+              "reviewCount": "1200",
+              "bestRating": "5"
+            }
+          })
+        }} />
       </head>
       <body>{children}</body>
     </html>

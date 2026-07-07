@@ -31,6 +31,9 @@ export default async function ProtectedLayout({ children }: { children: React.Re
           <Link href="/admin/homepage/sections">
             Homepage Sections
           </Link>
+          <Link href="/admin/media">
+            Media
+          </Link>
           <Link href="/admin/blog">
             Blog
           </Link>

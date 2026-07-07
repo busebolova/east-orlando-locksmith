@@ -1,13 +1,13 @@
 {
-  "siteName": null,
-  "phone": null,
-  "phoneRaw": null,
-  "address": null,
-  "email": null,
-  "hours": null,
-  "googleRating": null,
-  "reviewCount": null,
-  "serviceArea": null,
+  "siteName": "East Orlando Locksmith",
+  "phone": "(407) 555-5625",
+  "phoneRaw": "+14075555625",
+  "address": "Orlando, FL",
+  "email": "info@eastorlandolocksmith.com",
+  "hours": "24/7 Emergency Service",
+  "googleRating": "5.0",
+  "reviewCount": "1200+",
+  "serviceArea": "East Orlando & Surrounding Areas",
   "colors": {
     "primary": "#071321",
     "accent": "#e6a329",
@@ -15,9 +15,9 @@
     "surface": "#f8f9fa"
   },
   "adminPassword": "pas12345",
-  "maintenanceMode": true,
-  "googleAnalyticsId": null,
-  "googleSearchConsoleVerification": null,
+  "maintenanceMode": false,
+  "googleAnalyticsId": "",
+  "googleSearchConsoleVerification": "",
   "navigation": {
     "services": [
       {
@@ -225,9 +225,9 @@
   ],
   "siteContent": {
     "hero": {
-      "title": null,
-      "subtitle": null,
-      "cta": null
+      "title": "Orlando's Most Trusted Locksmith",
+      "subtitle": "24/7 emergency locksmith service across East Orlando — car keys, home lockouts, rekeying, and more. Real dispatch, real people, real fast.",
+      "cta": "Call Now"
     },
     "trustSignals": {
       "responseTime": "15-30 min",
@@ -236,8 +236,8 @@
       "rating": "5.0"
     },
     "footer": {
-      "description": null,
-      "copyright": null
+      "description": "Professional 24/7 locksmith service for East Orlando, Winter Park, and surrounding communities. Licensed, insured, and ready when you need us most.",
+      "copyright": "2026 East Orlando Locksmith. All rights reserved."
     },
     "homepage": {
       "pill": "⚡ 24/7 Emergency Locksmith",
