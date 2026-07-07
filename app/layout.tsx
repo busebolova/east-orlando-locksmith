@@ -4,7 +4,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Admin Panel - East Orlando Locksmith',
   description: 'Site management admin panel',
-  icons: [{ icon: '/favicon.ico' }],
+  icons: [{ rel: 'icon', url: '/favicon.ico' }],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
