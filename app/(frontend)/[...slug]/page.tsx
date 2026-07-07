@@ -37,7 +37,8 @@ export default async function FrontendPage({ params }: { params: Promise<{ slug:
         background: 'linear-gradient(135deg, #071321 0%, #0f2940 100%)',
         color: 'white',
         padding: '80px 32px',
-        textAlign: 'center'
+        textAlign: 'center',
+        minHeight: 0
       }}>
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
           <h1 style={{ fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 800, marginBottom: 16, lineHeight: 1.15 }}>

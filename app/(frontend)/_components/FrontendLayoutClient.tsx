@@ -120,7 +120,7 @@ export default function FrontendLayoutClient({
         </nav>
       </header>
 
-      <main>{children}</main>
+      <main style={{ paddingTop: 142 }}>{children}</main>
 
       <footer className="site-footer" style={{ background: '#071321', color: 'rgba(255,255,255,0.8)', padding: '48px 0 24px' }}>
         <div style={{ width: 'min(1320px, calc(100% - 64px))', margin: '0 auto' }}>
