@@ -21,7 +21,7 @@
     "@types/node": "^22.15.3",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "typescript": "^5.8.3",
+    "typescript": "^5.7.3",
     "vercel": "^54.21.0"
   },
   "repository": {

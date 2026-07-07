@@ -1,9 +1,15 @@
-import { validateRequest } from '@/lib/auth';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import { validateSession } from '@/lib/auth';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  // For now, allow access without strict auth check during development
+  const cookieStore = await cookies();
+  const token = cookieStore.get('admin_session')?.value;
+  if (!validateSession(token)) {
+    redirect('/admin/login');
+  }
+
   return (
     <div className="admin-layout">
       <aside className="sidebar">
@@ -34,6 +40,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <div className="sidebar-footer">
           <Link href="/" style={{ color: 'inherit', textDecoration: 'none', opacity: 0.7 }}>
             ← View Site
+          </Link>
+          <Link href="/admin/logout" style={{ color: '#ef4444', textDecoration: 'none', opacity: 0.8, fontSize: 13, marginTop: 8, display: 'block' }}>
+            Logout
           </Link>
         </div>
       </aside>
