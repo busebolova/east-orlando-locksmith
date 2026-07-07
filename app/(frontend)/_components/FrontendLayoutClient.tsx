@@ -110,6 +110,11 @@ export default function FrontendLayoutClient({
               </div>
             ))}
 
+            <Link className="nav-search-link" href="/search" aria-label="Search">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.5 14h-.8l-.3-.3a6.5 6.5 0 0 0 1.6-4.2 6.5 6.5 0 1 0-6.5 6.5c1.6 0 3-.6 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14Z"/></svg>
+              <span>Search</span>
+            </Link>
+
             <a className="nav-phone btn btn-gold" href={`tel:${phoneRaw}`}>
               <span className="header-phone" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-3.2c.3-.4.7-.5 1.1-.3 1.2.5 2.5.8 3.8.9.5 0 .9.4.9.9v3.3c0 .5-.4 1-.9 1C9.4 20.5 3.5 14.6 3 6.7c0-.5.4-.9.9-.9h3.3c.5 0 .9.4.9.9.1 1.3.4 2.6.9 3.8.1.4 0 .9-.3 1.1L6.6 10.8Z"/></svg>
@@ -154,6 +159,18 @@ export default function FrontendLayoutClient({
           <span>&copy; {copyright}</span>
         </div>
       </footer>
+
+      {/* Mobile Bottom Nav */}
+      <nav className="bottom-nav" aria-label="Mobile navigation">
+        <Link href="/" className={`bottom-nav-item ${pathname === '/' ? 'active' : ''}`}>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          <span>Home</span>
+        </Link>
+        <Link href="/search" className={`bottom-nav-item ${pathname === '/search' ? 'active' : ''}`}>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M15.5 14h-.8l-.3-.3a6.5 6.5 0 0 0 1.6-4.2 6.5 6.5 0 1 0-6.5 6.5c1.6 0 3-.6 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14Z"/></svg>
+          <span>Search</span>
+        </Link>
+      </nav>
     </>
   );
 }

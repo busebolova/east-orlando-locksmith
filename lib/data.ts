@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import { syncToGitHub } from '@/lib/github-sync';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const DATA_FILE = path.join(DATA_DIR, 'site-content.json');
@@ -11,6 +12,7 @@ export type Page = {
   type: string;
   description: string;
   content?: string;
+  seoKeywords?: string;
   location?: string;
   service?: string;
   brand?: string;
@@ -44,11 +46,98 @@ export type SiteContent = {
   navigation: Record<string, { label: string; slug: string }[]>;
   pages: Page[];
   blogPosts: BlogPost[];
+  maintenanceMode?: boolean;
+  googleAnalyticsId?: string;
+  googleSearchConsoleVerification?: string;
   siteContent: {
     hero: { title: string; subtitle: string; cta: string };
     trustSignals: Record<string, string>;
     footer: { description: string; copyright: string };
+    homepage: HomepageSections;
   };
+};
+
+export type HomepageHeroImage = {
+  src: string;
+  alt: string;
+};
+
+export type HomepageTrustItem = {
+  text: string;
+};
+
+export type HomepageServiceCard = {
+  icon: string; // SVG path
+  title: string;
+  description: string;
+  features: string[];
+  link: string;
+};
+
+export type HomepageTrustCard = {
+  icon: string;
+  title: string;
+  description: string;
+};
+
+export type HomepageReview = {
+  name: string;
+  text: string;
+  source: string;
+  location: string;
+};
+
+export type HomepageBrand = {
+  name: string;
+};
+
+export type HomepageFaq = {
+  question: string;
+  answer: string;
+};
+
+export type HomepageSections = {
+  pill: string;
+  heading: string;
+  heroImage: HomepageHeroImage;
+  trustItems: HomepageTrustItem[];
+  priorityEyebrow: string;
+  priorityHeading: string;
+  priorityText: string;
+  servicePoints: {
+    icon: string;
+    title: string;
+    subtitle: string;
+    link: string;
+  }[];
+  servicesEyebrow: string;
+  servicesHeading: string;
+  servicesText: string;
+  serviceCards: HomepageServiceCard[];
+  trustEyebrow: string;
+  trustHeading: string;
+  trustText: string;
+  trustCards: HomepageTrustCard[];
+  areasEyebrow: string;
+  areasHeading: string;
+  areasText: string;
+  extraAreas: string[];
+  responseEyebrow: string;
+  responseHeading: string;
+  timeline: { title: string; description: string }[];
+  reviewsEyebrow: string;
+  reviewsHeading: string;
+  reviews: HomepageReview[];
+  brandsEyebrow: string;
+  brandsHeading: string;
+  brandsText: string;
+  brands: HomepageBrand[];
+  faqEyebrow: string;
+  faqHeading: string;
+  faq: HomepageFaq[];
+  ctaEyebrow: string;
+  ctaHeading: string;
+  ctaText: string;
 };
 
 let cache: SiteContent | null = null;
@@ -63,6 +152,7 @@ export async function getData(): Promise<SiteContent> {
 export async function saveData(data: SiteContent): Promise<void> {
   await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8');
   cache = data;
+  syncToGitHub().catch(() => {});
 }
 
 export async function getPages(): Promise<Page[]> {

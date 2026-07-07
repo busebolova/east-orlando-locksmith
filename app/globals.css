@@ -431,6 +431,65 @@ textarea.form-control {
   to { transform: rotate(360deg); }
 }
 
+/* Mobile Bottom Nav */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #071321;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  z-index: 100;
+  justify-content: space-around;
+  padding: 6px 0 env(safe-area-inset-bottom, 6px);
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 16px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.bottom-nav-item.active,
+.bottom-nav-item:hover {
+  color: #e6a329;
+}
+
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: flex;
+  }
+}
+
+/* Nav Search Link */
+.nav-search-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.15s;
+}
+
+.nav-search-link:hover {
+  color: #e6a329;
+}
+
+/* fix for admin body padding overriding frontend header */
+body:has(.site-header) {
+  padding-top: 0;
+}
+
 /* Empty State */
 .empty-state {
   text-align: center;
@@ -603,4 +662,13 @@ textarea.form-control {
 
 .toggle input:checked + .toggle-slider:before {
   transform: translateX(18px);
+}
+
+/* ========== HOMEPAGE HERO SPACING OVERRIDES ========== */
+.hero .rating-row {
+  gap: 16px;
+}
+
+.hero .rating-row + .hero-actions {
+  margin-top: 8px;
 }

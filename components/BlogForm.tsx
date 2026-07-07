@@ -86,8 +86,15 @@ export default function BlogForm({
       <AIContentGenerator onContentGenerated={handleAIContent} initialPrompt="" />
 
       <div className="form-group">
-        <label>Content (HTML)</label>
-        <textarea name="content" className="form-control" rows={slug ? 20 : 15} defaultValue={defaultContent} placeholder="<p>Write your blog content in HTML...</p>" required />
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+          <label style={{ margin: 0, fontWeight: 600 }}>Blog Icerigi</label>
+        </div>
+        <textarea name="content" className="form-control" rows={slug ? 20 : 15} defaultValue={defaultContent}
+          placeholder="Blog içeriğini buraya yazın... ## ile baslik, **kalın** ve - liste elemani kullanabilirsiniz."
+          style={{ fontFamily: 'monospace', fontSize: 13, lineHeight: 1.6, minHeight: 300 }} required />
+        <div style={{ fontSize: 11, color: '#9ca3af', marginTop: 4 }}>
+          ## Baslik  **kalin yazi**  - liste elemani  kullanabilirsiniz.
+        </div>
       </div>
 
       <div className="form-row">

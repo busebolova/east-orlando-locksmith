@@ -23,19 +23,20 @@ export default function AIContentGenerator({ onContentGenerated, initialPrompt =
 Topic: ${prompt}
 
 Requirements:
-- Title (as an H1 tag)
+- Title
 - Meta description (150-160 characters)
-- Content with proper HTML formatting using <h2>, <h3>, <p>, <ul>, <li> tags
+- Content with plain text formatting: use ## for section headings, **bold** for emphasis, - for list items
 - Include relevant local keywords naturally
 - Minimum 500 words
 - Use British/American English as appropriate
 - Include a call to action to call the locksmith
+- Do NOT use HTML tags at all — plain text only with ## headings, **bold**, and - lists
 
 Return the response in this exact format:
 TITLE: <the title>
 DESCRIPTION: <meta description>
 ---CONTENT---
-<full HTML content>`;
+<plain text content with ## headings, **bold**, and - list items>`;
 
       const res = await fetch('/api/ai/generate', {
         method: 'POST',
@@ -57,7 +58,9 @@ DESCRIPTION: <meta description>
 
       const title = titleMatch?.[1]?.trim();
       const description = descMatch?.[1]?.trim();
-      const content = contentMatch?.trim() || fullContent;
+      let content = contentMatch?.trim() || fullContent;
+      // Strip any HTML that might still be returned
+      content = content.replace(/<\/?[^>]+(>|$)/g, '').replace(/&nbsp;/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
 
       onContentGenerated(content, title, description);
     } catch (err: unknown) {

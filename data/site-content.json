@@ -1,37 +1,77 @@
 {
-  "siteName": "East Orlando Locksmith",
-  "phone": "(407) 555-LOCK",
-  "phoneRaw": "+14075555625",
-  "address": "120 E Robinson St, Orlando, FL 32801",
-  "email": "info@eastorlandolocksmith.com",
-  "hours": "24/7 Emergency Service",
-  "googleRating": "5.0",
-  "reviewCount": "1200+",
-  "serviceArea": "Orlando, Winter Park, Baldwin Park, Lake Nona, Maitland and nearby Orange County communities",
+  "siteName": null,
+  "phone": null,
+  "phoneRaw": null,
+  "address": null,
+  "email": null,
+  "hours": null,
+  "googleRating": null,
+  "reviewCount": null,
+  "serviceArea": null,
   "colors": {
     "primary": "#071321",
     "accent": "#e6a329",
     "background": "#ffffff",
     "surface": "#f8f9fa"
   },
+  "adminPassword": "pas12345",
+  "maintenanceMode": true,
+  "googleAnalyticsId": null,
+  "googleSearchConsoleVerification": null,
   "navigation": {
     "services": [
-      { "label": "24/7 Emergency Locksmith", "slug": "service-emergency-lockout" },
-      { "label": "Residential Locksmith", "slug": "service-emergency-lockout" },
-      { "label": "Commercial Locksmith", "slug": "zip-32801-locksmith" },
-      { "label": "Lockout Service", "slug": "winter-park-emergency-lockout" },
-      { "label": "Car Key Replacement", "slug": "zip-32803-car-key-replacement" },
-      { "label": "All Services", "slug": "seo-index" }
+      {
+        "label": "24/7 Emergency Locksmith",
+        "slug": "service-emergency-lockout"
+      },
+      {
+        "label": "Residential Locksmith",
+        "slug": "service-emergency-lockout"
+      },
+      {
+        "label": "Commercial Locksmith",
+        "slug": "zip-32801-locksmith"
+      },
+      {
+        "label": "Lockout Service",
+        "slug": "winter-park-emergency-lockout"
+      },
+      {
+        "label": "Car Key Replacement",
+        "slug": "zip-32803-car-key-replacement"
+      },
+      {
+        "label": "All Services",
+        "slug": "seo-index"
+      }
     ],
     "locations": [
-      { "label": "Winter Park", "slug": "location-winter-park" },
-      { "label": "32801 Downtown Orlando", "slug": "zip-32801-locksmith" },
-      { "label": "32803 Colonialtown", "slug": "zip-32803-car-key-replacement" }
+      {
+        "label": "Winter Park",
+        "slug": "location-winter-park"
+      },
+      {
+        "label": "32801 Downtown Orlando",
+        "slug": "zip-32801-locksmith"
+      },
+      {
+        "label": "32803 Colonialtown",
+        "slug": "zip-32803-car-key-replacement"
+      }
     ],
     "automotive": [
-      { "label": "Ford Key Programming", "slug": "ford-key-programming" },
-      { "label": "Ford Locksmith", "slug": "brand-ford-locksmith" },
-      { "label": "Car Key Replacement", "slug": "zip-32803-car-key-replacement" }
+      {
+        "label": "Ford Key Programming",
+        "slug": "ford-key-programming"
+      },
+      {
+        "label": "Ford Locksmith",
+        "slug": "brand-ford-locksmith"
+      },
+      {
+        "label": "Car Key Replacement",
+        "slug": "zip-32803-car-key-replacement"
+      }
     ]
   },
   "pages": [
@@ -127,9 +167,13 @@
       "title": "Orlando Lockout Guide — Fastest Ways to Get Back Inside",
       "slug": "orlando-lockout-guide",
       "description": "A complete guide to handling lockouts in Orlando. What to do when locked out of your home, car, or business.",
-      "content": "<p>Getting locked out in Orlando is a common experience — especially near busy areas like downtown, the attractions corridor, or UCF. Knowing who to call and what to do in the first few minutes can save time, money and frustration.</p>",
+      "content": "Getting locked out in Orlando is a common experience — especially near busy areas like downtown, the attractions corridor, or UCF. Knowing who to call and what to do in the first few minutes can save time, money and frustration.\n\n## What to Do When Locked Out\n\n- **Stay calm** — panicking leads to rushed decisions\n- **Check all doors and windows** — you may have an unlocked entry you forgot about\n- **Call a professional locksmith** — East Orlando Locksmith responds in 15-30 minutes\n- **Never force the lock** — you could damage the mechanism and increase repair costs\n- **If locked out of your car**, check if a spare key is accessible before calling\n\n## Why Choose Professional Help\n\nA licensed locksmith arrives with the right tools to open most locks without damage. East Orlando Locksmith provides **24/7 emergency service** across all of Central Florida, including Winter Park, Baldwin Park, and Downtown Orlando.",
       "category": "Lockout Guides",
-      "tags": ["Orlando", "emergency", "lockout"],
+      "tags": [
+        "Orlando",
+        "emergency",
+        "lockout"
+      ],
       "published": true,
       "date": "2026-01-15"
     },
@@ -138,9 +182,13 @@
       "title": "Locked Out in Baldwin Park? Here's What to Do",
       "slug": "baldwin-park-emergency-lockout",
       "description": "A local guide for Baldwin Park residents facing home, car or business lockouts.",
-      "content": "<p>Baldwin Park is one of Orlando's most popular communities. A lockout here can disrupt your entire day.</p>",
+      "content": "Baldwin Park is one of Orlando's most popular communities. A lockout here can disrupt your entire day. Whether you're locked out of your home near the Village Center or your car on Lakeshore Drive, quick local help is available.\n\n## Quick Steps for Baldwin Park Residents\n\n- **Check for other entry points** — garage door, back door, or unlocked window\n- **Call Baldwin Park's local locksmith** — East Orlando Locksmith knows the neighborhood\n- **Wait in a safe location** — especially at night, stay in a well-lit area\n- **Have your ID ready** — proof of residency or vehicle ownership speeds things up\n\n## Why Mobile Locksmith Service Works Best\n\nA mobile locksmith brings the shop to you. Instead of towing your car to a dealership or breaking a window, one call brings a **fully equipped van** to your Baldwin Park location with professional lockout tools, key cutting, and programming equipment.",
       "category": "Lockout Guides",
-      "tags": ["Baldwin Park", "emergency", "lockout"],
+      "tags": [
+        "Baldwin Park",
+        "emergency",
+        "lockout"
+      ],
       "published": true,
       "date": "2026-02-01"
     },
@@ -149,9 +197,13 @@
       "title": "Toyota Key Replacement in Orlando — What You Need to Know",
       "slug": "toyota-key-replacement",
       "description": "A complete guide to Toyota car key replacement, fob programming and mobile locksmith service across Orlando.",
-      "content": "<p>Toyota is one of the most popular vehicle brands in Central Florida. Losing or breaking a Toyota key in Orlando can be frustrating.</p>",
+      "content": "Toyota is one of the most popular vehicle brands in Central Florida. Losing or breaking a Toyota key in Orlando can be frustrating, but getting a replacement is faster and more affordable than most people think.\n\n## Toyota Key Types\n\n- **Traditional metal key** — older models, simple cutting\n- **Transponder key** — chip key that requires programming to start the vehicle\n- **Smart key / push-to-start fob** — keyless entry and ignition fob\n- **Laser-cut key** — high-security sidewinder key with precise cutting\n\n## Mobile Key Replacement in Orlando\n\nEast Orlando Locksmith provides **mobile Toyota key replacement** across all of Orlando. We come to your location with programming equipment and key cutting tools. Most Toyota keys can be replaced and programmed on-site in under 30 minutes, saving you a trip to the dealership.",
       "category": "Automotive Keys",
-      "tags": ["Toyota", "Orlando", "key replacement"],
+      "tags": [
+        "Toyota",
+        "Orlando",
+        "key replacement"
+      ],
       "published": true,
       "date": "2026-02-15"
     },
@@ -160,18 +212,22 @@
       "title": "Ford Key Programming in Winter Park — Complete Guide",
       "slug": "winter-park-ford-key-programming",
       "description": "Everything Winter Park Ford owners need to know about key programming, replacement and mobile locksmith service.",
-      "content": "<p>Winter Park is home to thousands of Ford drivers. When your Ford key stops working, you need a solution that doesn't require towing.</p>",
+      "content": "Winter Park is home to thousands of Ford drivers. When your Ford key stops working, you need a solution that doesn't require towing.\n\n## Ford Key Programming Services\n\n- **Transponder key programming** — chip keys for Ford, Lincoln, Mercury\n- **Smart fob programming** — push-to-start remote keys\n- **Key cutting by code** — laser-cut and sidewinder keys\n- **Broken key extraction** — remove and replace damaged keys\n- **Ignition lock repair** — worn ignition cylinder service\n\n## Models We Cover\n\nEast Orlando Locksmith provides mobile Ford key programming for **F-150, Mustang, Explorer, Escape, Focus, Fusion, Edge, Transit**, and many other Ford and Lincoln models.\n\n**Why choose mobile service?** A mobile locksmith saves you the dealership wait time and towing costs. We bring the programming equipment to you anywhere in Winter Park and the greater Orlando area.",
       "category": "Automotive Keys",
-      "tags": ["Ford", "Winter Park", "key programming"],
+      "tags": [
+        "Ford",
+        "Winter Park",
+        "key programming"
+      ],
       "published": true,
       "date": "2026-03-01"
     }
   ],
   "siteContent": {
     "hero": {
-      "title": "Orlando's Trusted 24/7 Locksmith",
-      "subtitle": "Fast, professional locksmith services for homes, cars, and businesses across Orlando and surrounding communities.",
-      "cta": "Call (407) 555-LOCK"
+      "title": null,
+      "subtitle": null,
+      "cta": null
     },
     "trustSignals": {
       "responseTime": "15-30 min",
@@ -180,8 +236,186 @@
       "rating": "5.0"
     },
     "footer": {
-      "description": "Fast, reliable locksmith service for homes, businesses, and vehicles across Orlando, Winter Park, Baldwin Park and nearby communities.",
-      "copyright": "2026 East Orlando Locksmith. All rights reserved."
+      "description": null,
+      "copyright": null
+    },
+    "homepage": {
+      "pill": "⚡ 24/7 Emergency Locksmith",
+      "heading": "Orlando’s Most <span>Trusted</span> Locksmith",
+      "heroImage": {
+        "src": "/assets/hero-locksmith.png",
+        "alt": "Locksmith repairing a door lock at night"
+      },
+      "trustItems": [
+        { "text": "Licensed & Insured" },
+        { "text": "Fast Response" },
+        { "text": "Upfront Pricing" }
+      ],
+      "priorityEyebrow": "Trusted By Thousands",
+      "priorityHeading": "Your Security is Our Priority",
+      "priorityText": "We understand that security and peace of mind are priceless. That's why we deliver exceptional service every time.",
+      "servicePoints": [
+        {
+          "icon": "circle-icon clock",
+          "title": "24/7",
+          "subtitle": "Emergency Service",
+          "link": "service-emergency-lockout"
+        },
+        {
+          "icon": "circle-icon location",
+          "title": "Certified",
+          "subtitle": "Technicians",
+          "link": "location-winter-park"
+        },
+        {
+          "icon": "circle-icon shield",
+          "title": "Modern",
+          "subtitle": "Equipment",
+          "link": "zip-32801-locksmith"
+        },
+        {
+          "icon": "circle-icon dollar",
+          "title": "Upfront",
+          "subtitle": "Pricing",
+          "link": "zip-32803-car-key-replacement"
+        },
+        {
+          "icon": "circle-icon thumbs",
+          "title": "Satisfaction",
+          "subtitle": "Guaranteed",
+          "link": "blog"
+        }
+      ],
+      "servicesEyebrow": "Locksmith Services",
+      "servicesHeading": "Complete locksmith support for every urgent moment",
+      "servicesText": "From car key issues to home lockouts and commercial rekeys, East Orlando Locksmith keeps service focused, local, and easy to act on.",
+      "serviceCards": [
+        {
+          "icon": "car",
+          "title": "Automotive Locksmith",
+          "description": "Mobile car locksmith help for lockouts, lost keys, fobs, and key programming around Orlando.",
+          "features": ["Car lockout service", "Car key replacement", "Ford key programming", "Broken key extraction"],
+          "link": "zip-32803-car-key-replacement"
+        },
+        {
+          "icon": "home",
+          "title": "Residential Locksmith",
+          "description": "Clean, careful lock service for homes, condos, apartments, short-term rentals, and move-ins.",
+          "features": ["House lockouts", "Home rekey service", "Deadbolt installation", "Smart lock setup"],
+          "link": "service-emergency-lockout"
+        },
+        {
+          "icon": "building",
+          "title": "Commercial Locksmith",
+          "description": "Business-focused locksmith service for offices, storefronts, property managers, and teams.",
+          "features": ["Office rekeying", "Storefront locks", "Master key planning", "After-hours lockouts"],
+          "link": "zip-32801-locksmith"
+        }
+      ],
+      "trustEyebrow": "Why Choose Us",
+      "trustHeading": "Built for urgent calls and long-term trust",
+      "trustText": "Every visit is designed around clear communication, local dispatch awareness, and locksmith work that respects your time and property.",
+      "trustCards": [
+        {
+          "icon": "clock",
+          "title": "24/7 Emergency Service",
+          "description": "Late night, early morning, weekend, and holiday lock issues are handled with real dispatch."
+        },
+        {
+          "icon": "user-check",
+          "title": "Certified Technicians",
+          "description": "Trained locksmiths arrive prepared for residential, commercial, and automotive situations."
+        },
+        {
+          "icon": "zap",
+          "title": "Fast Response",
+          "description": "We route calls around Orlando corridors to reduce waiting during stressful lockouts."
+        },
+        {
+          "icon": "dollar-sign",
+          "title": "Upfront Pricing",
+          "description": "Service ranges are explained before work begins, with no vague surprises at the door."
+        },
+        {
+          "icon": "shield",
+          "title": "Licensed & Insured",
+          "description": "Authorization checks, clean work, and documented service are part of the process."
+        },
+        {
+          "icon": "thumbs-up",
+          "title": "Satisfaction Guaranteed",
+          "description": "We solve the immediate issue and help you choose the safest next step."
+        }
+      ],
+      "areasEyebrow": "Service Areas",
+      "areasHeading": "Local locksmith coverage across East Orlando",
+      "areasText": "Our dispatch pattern is built around East Orlando streets, residential communities, retail corridors, campus areas, and business districts.",
+      "extraAreas": ["Oviedo", "Maitland", "Casselberry", "Altamonte Springs", "Baldwin Park", "Waterford Lakes", "Alafaya", "Union Park"],
+      "responseEyebrow": "Response Timeline",
+      "responseHeading": "A simple process when every minute matters",
+      "timeline": [
+        { "title": "Call us", "description": "Tell us the lock issue, your location, and any access details." },
+        { "title": "We dispatch", "description": "The closest available technician receives the job and route." },
+        { "title": "Technician arrives", "description": "We verify authorization, inspect the lock, and explain the work." },
+        { "title": "Problem solved", "description": "You get back inside, back on the road, or back to business." }
+      ],
+      "reviewsEyebrow": "Customer Reviews",
+      "reviewsHeading": "Trusted by Orlando homeowners, drivers, and businesses",
+      "reviews": [
+        {
+          "name": "Marissa K.",
+          "text": "Locked out near Lake Eola after dinner. The technician arrived quickly, opened the door cleanly, and explained the rekey option without pressure.",
+          "source": "Google",
+          "location": "Downtown Orlando · Home Lockout"
+        },
+        {
+          "name": "Daniel R.",
+          "text": "My Ford key stopped working in a 32803 parking lot. They checked the fob, programmed a replacement, and had me moving again.",
+          "source": "Yelp",
+          "location": "Colonialtown · Ford Key Programming"
+        },
+        {
+          "name": "Angela M.",
+          "text": "We needed an office rekey after staff changes. Clear quote, clean work, and they labeled everything before leaving.",
+          "source": "Google",
+          "location": "Winter Park · Commercial Rekey"
+        }
+      ],
+      "brandsEyebrow": "Vehicle Brands",
+      "brandsHeading": "Automotive locksmith support for the brands Orlando drives",
+      "brandsText": "Key replacement and programming availability depends on model year, key type, and immobilizer system.",
+      "brands": [
+        { "name": "Toyota" }, { "name": "Honda" }, { "name": "Ford" }, { "name": "Chevrolet" },
+        { "name": "Nissan" }, { "name": "Hyundai" }, { "name": "Kia" }, { "name": "BMW" },
+        { "name": "Mercedes-Benz" }, { "name": "Audi" }, { "name": "Lexus" }
+      ],
+      "faqEyebrow": "FAQ",
+      "faqHeading": "Orlando locksmith questions, answered clearly",
+      "faq": [
+        {
+          "question": "How fast can a locksmith reach East Orlando?",
+          "answer": "Arrival depends on traffic and call volume, but calls near Downtown Orlando, Winter Park, Baldwin Park, Waterford Lakes, and Alafaya are routed to the closest available technician."
+        },
+        {
+          "question": "Can you unlock my home or car without damage?",
+          "answer": "Many lockouts can be handled with non-destructive tools. If a lock is damaged, worn, or unsafe, the technician explains repair, rekey, or replacement options before work begins."
+        },
+        {
+          "question": "Do you provide car key programming?",
+          "answer": "Yes, we support many transponder keys, remote head keys, and smart fobs, including Ford key programming. Compatibility depends on make, model, year, and fob availability."
+        },
+        {
+          "question": "Should I rekey after losing keys?",
+          "answer": "Rekeying is recommended when keys are lost, stolen, left with a former tenant, or possibly connected to your address or business."
+        },
+        {
+          "question": "Do you handle commercial locksmith work?",
+          "answer": "Yes. We help offices, storefronts, rental properties, and managers with rekeys, lock changes, lockouts, and key control planning."
+        }
+      ],
+      "ctaEyebrow": "Emergency Ready",
+      "ctaHeading": "Need a locksmith right now?",
+      "ctaText": "A real technician is ready to help with lockouts, rekeys, car keys, and urgent lock problems across East Orlando."
     }
   }
 }

@@ -2,6 +2,7 @@ import { getData } from '@/lib/data';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { renderContent } from '@/lib/content-renderer';
 
 export async function generateStaticParams() {
   const data = await getData();
@@ -110,7 +111,9 @@ export default async function FrontendPage({ params }: { params: Promise<{ slug:
       {/* Editable Content */}
       {page.content && (
         <section className="content-band editable-content">
-          <div dangerouslySetInnerHTML={{ __html: page.content }} />
+          <div style={{ whiteSpace: 'pre-wrap', lineHeight: 1.8 }}>
+            {renderContent(page.content)}
+          </div>
         </section>
       )}
 

@@ -1,8 +1,19 @@
-import type { NextFetchEvent, NextRequest } from 'next/server';
+import { getData } from '@/lib/data';
 
-// Simple session token stored in cookie
 const SESSION_COOKIE = 'admin_session';
 const SESSION_SECRET = 'eol-admin-2026';
+
+export async function verifyPassword(inputPassword: string): Promise<boolean> {
+  const data = await getData();
+  return inputPassword === (data as any).adminPassword;
+}
+
+export async function updatePassword(newPassword: string): Promise<void> {
+  const { saveData } = await import('@/lib/data');
+  const data = await getData();
+  (data as any).adminPassword = newPassword;
+  await saveData(data);
+}
 
 export function createSession(): string {
   const token = Buffer.from(
@@ -19,9 +30,4 @@ export function validateSession(token: string | undefined): boolean {
   } catch {
     return false;
   }
-}
-
-export async function validateRequest(request: NextRequest, _event?: NextFetchEvent): Promise<boolean> {
-  const token = request.cookies.get(SESSION_COOKIE)?.value;
-  return validateSession(token);
 }

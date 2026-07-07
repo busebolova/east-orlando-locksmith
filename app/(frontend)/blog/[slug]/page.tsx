@@ -2,6 +2,7 @@ import { getData } from '@/lib/data';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { renderContent } from '@/lib/content-renderer';
 
 export async function generateStaticParams() {
   const data = await getData();
@@ -53,8 +54,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div
             className="blog-content"
             style={{ fontSize: 15, lineHeight: 1.9, color: '#374151' }}
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+          >
+            {renderContent(post.content)}
+          </div>
 
           <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid #e8e9ed' }}>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 24 }}>
