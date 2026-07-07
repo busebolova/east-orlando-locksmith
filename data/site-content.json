@@ -8,6 +8,10 @@
   "googleRating": "5.0",
   "reviewCount": "1200+",
   "serviceArea": "East Orlando & Surrounding Areas",
+  "headerLogo": "",
+  "headerLogoWidth": 315,
+  "headerLogoHeight": 86,
+  "favicon": "",
   "colors": {
     "primary": "#071321",
     "accent": "#e6a329",

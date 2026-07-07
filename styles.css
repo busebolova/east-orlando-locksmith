@@ -828,6 +828,11 @@ h2 {
     display: grid;
   }
 
+  .nav-links.is-open {
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+  }
+
   .nav-links {
     gap: 0;
     justify-content: stretch;
@@ -851,10 +856,24 @@ h2 {
 
   .dropdown {
     display: none;
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    padding: 0 0 0 14px;
+    min-width: auto;
+  }
+
+  .dropdown.is-open {
+    display: block;
   }
 
   .nav-item > a span {
-    display: none;
+    display: inline;
+    font-size: 12px;
+    margin-left: 6px;
   }
 
   .nav-actions {

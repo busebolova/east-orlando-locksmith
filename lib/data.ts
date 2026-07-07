@@ -5,6 +5,37 @@ import { syncToGitHub } from '@/lib/github-sync';
 const DATA_DIR = path.join(process.cwd(), 'data');
 const DATA_FILE = path.join(DATA_DIR, 'site-content.json');
 
+export type PageFaqItem = {
+  question: string;
+  answer: string;
+};
+
+export type PageSections = {
+  introEyebrow?: string;
+  introHeading?: string;
+  introText?: string;
+  problemHeading?: string;
+  problemText?: string;
+  solutionHeading?: string;
+  solutionText?: string;
+  localEyebrow?: string;
+  localHeading?: string;
+  localText?: string;
+  detailEyebrow?: string;
+  detailHeading?: string;
+  detailList?: string[];
+  trustEyebrow?: string;
+  trustHeading?: string;
+  trustText?: string;
+  trustBadges?: string[];
+  faqEyebrow?: string;
+  faqHeading?: string;
+  faqItems?: PageFaqItem[];
+  ctaEyebrow?: string;
+  ctaHeading?: string;
+  ctaText?: string;
+};
+
 export type Page = {
   id: string;
   title: string;
@@ -12,6 +43,7 @@ export type Page = {
   type: string;
   description: string;
   content?: string;
+  sections?: PageSections;
   seoKeywords?: string;
   location?: string;
   service?: string;
@@ -42,6 +74,10 @@ export type SiteContent = {
   googleRating: string;
   reviewCount: string;
   serviceArea: string;
+  headerLogo?: string;
+  headerLogoWidth?: number;
+  headerLogoHeight?: number;
+  favicon?: string;
   colors: Record<string, string>;
   navigation: Record<string, { label: string; slug: string }[]>;
   pages: Page[];

@@ -103,9 +103,9 @@ export default async function FrontendPage({ params }: { params: Promise<{ slug:
 
       {/* Intro */}
       <section className="content-band intro seo-intro">
-        <h2>Professional {page.service || 'Locksmith'} Service in {page.location || 'Orlando'}</h2>
+        <h2>{page.sections?.introHeading || `Professional ${page.service || 'Locksmith'} Service in ${page.location || 'Orlando'}`}</h2>
         <p>{page.description}</p>
-        <p>Trusted locksmith service for {page.location || 'the Orlando area'} — covering {page.service ? page.service.toLowerCase() : 'locksmith'} needs with professional dispatch, modern equipment, and clear communication from the first call to job completion.</p>
+        <p>{page.sections?.introText || `Trusted locksmith service for ${page.location || 'the Orlando area'} — covering ${page.service ? page.service.toLowerCase() : 'locksmith'} needs with professional dispatch, modern equipment, and clear communication from the first call to job completion.`}</p>
       </section>
 
       {/* Editable Content */}
@@ -120,21 +120,21 @@ export default async function FrontendPage({ params }: { params: Promise<{ slug:
       {/* Problem / Solution Cards */}
       <section className="content-grid seo-card-pair">
         <article className="premium-content-card">
-          <h2>Problem</h2>
-          <p>A lock issue usually arrives at the worst possible time. Whether you&rsquo;re locked out of your {page.type?.includes('car') ? 'vehicle' : 'home or business'}, dealing with a broken key, or need urgent access after hours, waiting around for uncertain help adds stress to an already frustrating situation. {page.location ? `In ${page.location}, ` : ''}you need a locksmith who confirms the details, gives a clear estimate, and arrives ready to work.</p>
+          <h2>{page.sections?.problemHeading || 'Problem'}</h2>
+          <p>{page.sections?.problemText || `A lock issue usually arrives at the worst possible time. Whether you&rsquo;re locked out of your ${page.type?.includes('car') ? 'vehicle' : 'home or business'}, dealing with a broken key, or need urgent access after hours, waiting around for uncertain help adds stress to an already frustrating situation. ${page.location ? `In ${page.location}, ` : ''}you need a locksmith who confirms the details, gives a clear estimate, and arrives ready to work.`}</p>
         </article>
         <article className="premium-content-card">
-          <h2>Solution</h2>
-          <p>East Orlando Locksmith dispatches a trained technician with entry tools, key programming equipment, and common lock hardware. We confirm your address, quote the likely service range, and explain whether non-destructive entry, rekeying, repair, or replacement is the right step — before any work begins.</p>
+          <h2>{page.sections?.solutionHeading || 'Solution'}</h2>
+          <p>{page.sections?.solutionText || 'East Orlando Locksmith dispatches a trained technician with entry tools, key programming equipment, and common lock hardware. We confirm your address, quote the likely service range, and explain whether non-destructive entry, rekeying, repair, or replacement is the right step — before any work begins.'}</p>
         </article>
       </section>
 
       {/* Local Panel */}
       <section className="content-band local-panel">
         <div>
-          <p className="eyebrow">Local Coverage</p>
-          <h2>Local Expertise Matters</h2>
-          <p>We regularly route technicians through {page.location || 'Orlando'}{page.zip ? ` (ZIP ${page.zip})` : ''} and surrounding corridors. Our dispatch pattern is built around local streets, residential communities, and business districts so we can provide reliable arrival estimates and professional service every time.</p>
+          <p className="eyebrow">{page.sections?.localEyebrow || 'Local Coverage'}</p>
+          <h2>{page.sections?.localHeading || 'Local Expertise Matters'}</h2>
+          <p>{page.sections?.localText || `We regularly route technicians through ${page.location || 'Orlando'}${page.zip ? ` (ZIP ${page.zip})` : ''} and surrounding corridors. Our dispatch pattern is built around local streets, residential communities, and business districts so we can provide reliable arrival estimates and professional service every time.`}</p>
           <p className="internal-copy">
             {otherPages.slice(0, 3).map((p, i) => (
               <span key={p.slug}>{i > 0 && ' · '}<Link href={`/${p.slug}`}>{p.title}</Link></span>
@@ -146,43 +146,57 @@ export default async function FrontendPage({ params }: { params: Promise<{ slug:
       {/* Detail Section */}
       <section className="content-band detail-section">
         <div className="section-heading">
-          <p className="eyebrow">Service Details</p>
-          <h2>{page.service || 'Locksmith'} Work We Handle</h2>
+          <p className="eyebrow">{page.sections?.detailEyebrow || 'Service Details'}</p>
+          <h2>{page.sections?.detailHeading || `${page.service || 'Locksmith'} Work We Handle`}</h2>
         </div>
         <ul className="detail-list">
-          <li>Emergency lockout service for homes, apartments, and condos</li>
-          <li>Vehicle lockout assistance and car key replacement</li>
-          <li>Business lockouts, storefront access, and after-hours rekeying</li>
-          <li>Broken key extraction, lock repair, and smart lock installation</li>
-          <li>Master key system planning for property managers</li>
-          <li>On-site key programming for modern transponder and smart fob systems</li>
+          {(page.sections?.detailList && page.sections.detailList.length > 0
+            ? page.sections.detailList
+            : [
+                'Emergency lockout service for homes, apartments, and condos',
+                'Vehicle lockout assistance and car key replacement',
+                'Business lockouts, storefront access, and after-hours rekeying',
+                'Broken key extraction, lock repair, and smart lock installation',
+                'Master key system planning for property managers',
+                'On-site key programming for modern transponder and smart fob systems',
+              ]
+          ).map((item, i) => (
+            <li key={i}>{item}</li>
+          ))}
         </ul>
       </section>
 
       {/* Trust Panel */}
       <section className="trust-panel">
         <div>
-          <p className="eyebrow">Trust Signals</p>
-          <h2>Why People Choose East Orlando Locksmith</h2>
-          <p>Licensed and insured service, upfront pricing, arrival updates, photo-ready work notes, and technicians who carry common residential, commercial, and automotive tools.</p>
+          <p className="eyebrow">{page.sections?.trustEyebrow || 'Trust Signals'}</p>
+          <h2>{page.sections?.trustHeading || 'Why People Choose East Orlando Locksmith'}</h2>
+          <p>{page.sections?.trustText || 'Licensed and insured service, upfront pricing, arrival updates, photo-ready work notes, and technicians who carry common residential, commercial, and automotive tools.'}</p>
         </div>
         <div className="trust-badges">
-          <span>Licensed &amp; Insured</span>
-          <span>24/7 Dispatch</span>
-          <span>Upfront Pricing</span>
-          <span>Local Coverage</span>
-          <span>GPS Tracking</span>
-          <span>Satisfaction Guaranteed</span>
+          {(page.sections?.trustBadges && page.sections.trustBadges.length > 0
+            ? page.sections.trustBadges
+            : ['Licensed & Insured', '24/7 Dispatch', 'Upfront Pricing', 'Local Coverage', 'GPS Tracking', 'Satisfaction Guaranteed']
+          ).map((badge, i) => (
+            <span key={i}>{badge}</span>
+          ))}
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="faq-section">
-        <p className="eyebrow">Questions People Search Before Calling</p>
-        <h2>FAQ</h2>
-        <details><summary>How fast can a locksmith reach {page.location || 'Orlando'}?</summary><p>Most {page.location ? page.location : 'Orlando'} calls are routed to the closest available technician. Arrival depends on traffic and call volume, but jobs in and around {page.location || 'East Orlando'} typically fit a 15 to 30 minute arrival target.</p></details>
-        <details><summary>Can you unlock my door without replacing the lock?</summary><p>Many house, apartment, and car lockouts can be opened without replacing hardware. If the lock is damaged, worn, or unsafe, the technician will explain repair and replacement options before starting any work.</p></details>
-        <details><summary>Do you provide {page.service || 'locksmith'} services after hours?</summary><p>Yes. We handle {page.service ? page.service.toLowerCase() : 'locksmith'} calls, lockouts, rekeys, and lock changes around the clock — including nights, weekends, and holidays.</p></details>
+        <p className="eyebrow">{page.sections?.faqEyebrow || 'Questions People Search Before Calling'}</p>
+        <h2>{page.sections?.faqHeading || 'FAQ'}</h2>
+        {(page.sections?.faqItems && page.sections.faqItems.length > 0
+          ? page.sections.faqItems
+          : [
+              { question: `How fast can a locksmith reach ${page.location || 'Orlando'}?`, answer: `Most ${page.location ? page.location : 'Orlando'} calls are routed to the closest available technician. Arrival depends on traffic and call volume, but jobs in and around ${page.location || 'East Orlando'} typically fit a 15 to 30 minute arrival target.` },
+              { question: 'Can you unlock my door without replacing the lock?', answer: 'Many house, apartment, and car lockouts can be opened without replacing hardware. If the lock is damaged, worn, or unsafe, the technician will explain repair and replacement options before starting any work.' },
+              { question: `Do you provide ${page.service || 'locksmith'} services after hours?`, answer: `Yes. We handle ${page.service ? page.service.toLowerCase() : 'locksmith'} calls, lockouts, rekeys, and lock changes around the clock — including nights, weekends, and holidays.` },
+            ]
+        ).map((item, i) => (
+          <details key={i}><summary>{item.question}</summary><p>{item.answer}</p></details>
+        ))}
       </section>
 
       {/* Related Grid */}
@@ -207,9 +221,9 @@ export default async function FrontendPage({ params }: { params: Promise<{ slug:
 
       {/* CTA Band */}
       <section className="cta-band cta-band--simple">
-        <p className="eyebrow">Emergency Ready</p>
-        <h2>Ready for Locksmith Help?</h2>
-        <p>Call now for professional {page.service ? page.service.toLowerCase() : 'locksmith'} service in {page.location || 'Orlando'}.</p>
+        <p className="eyebrow">{page.sections?.ctaEyebrow || 'Emergency Ready'}</p>
+        <h2>{page.sections?.ctaHeading || 'Ready for Locksmith Help?'}</h2>
+        <p>{page.sections?.ctaText || `Call now for professional ${page.service ? page.service.toLowerCase() : 'locksmith'} service in ${page.location || 'Orlando'}.`}</p>
         <div className="seo-actions seo-actions--center">
           <a className="btn btn-gold btn-large" href={`tel:${data.phoneRaw}`}>Call {data.phone}</a>
           <a className="btn btn-light btn-large" href={`tel:${data.phoneRaw}`}>Get Free Quote</a>

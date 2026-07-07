@@ -475,7 +475,7 @@ textarea.form-control {
   align-items: center;
   gap: 4px;
   padding: 8px 12px;
-  color: rgba(255,255,255,0.7);
+  color: #ffffff;
   text-decoration: none;
   font-size: 14px;
   transition: color 0.15s;
@@ -671,4 +671,185 @@ body:has(.site-header) {
 
 .hero .rating-row + .hero-actions {
   margin-top: 8px;
+}
+
+/* ========== HAMBURGER MENU OVERRIDES ========== */
+
+/* 4-dot hamburger icon — override span-based styling with SVG */
+.menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: none;
+}
+
+.menu-toggle svg {
+  display: block;
+}
+
+/* Show dropdown items inside mobile hamburger menu */
+@media (max-width: 768px) {
+  .nav-links.is-open .dropdown {
+    display: block;
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    padding: 0 0 4px 16px;
+    background: transparent;
+    transition: none;
+  }
+
+  .nav-links.is-open .dropdown a {
+    display: block;
+    padding: 10px 0;
+    font-size: 13px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links.is-open .dropdown a:last-child {
+    border-bottom: none;
+  }
+
+  /* Show the dropdown arrow span on mobile */
+  .nav-item > a span {
+    display: inline;
+  }
+}
+
+/* ========== TIPTAP / PROSEMIRROR EDITOR STYLES ========== */
+
+.rich-editor-wrapper {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.rich-editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 8px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.rich-editor-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #374151;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.rich-editor-btn:hover {
+  background: #e5e7eb;
+  border-color: #d1d5db;
+}
+
+.rich-editor-btn.is-active {
+  background: #e6a329;
+  color: #071321;
+  border-color: #e6a329;
+}
+
+.rich-editor-sep {
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background: #d1d5db;
+  margin: 0 4px;
+  align-self: center;
+}
+
+.rich-editor-content {
+  padding: 16px;
+  min-height: 300px;
+  outline: none;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #1f2937;
+}
+
+.rich-editor-content p {
+  margin-bottom: 12px;
+}
+
+.rich-editor-content h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 24px 0 12px;
+  color: #111827;
+}
+
+.rich-editor-content h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 20px 0 10px;
+  color: #1f2937;
+}
+
+.rich-editor-content ul,
+.rich-editor-content ol {
+  padding-left: 24px;
+  margin-bottom: 12px;
+}
+
+.rich-editor-content li {
+  margin-bottom: 4px;
+}
+
+.rich-editor-content code {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 13px;
+  color: #d63384;
+}
+
+.rich-editor-content pre {
+  background: #1f2937;
+  color: #e5e7eb;
+  padding: 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+
+.rich-editor-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+.rich-editor-content hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 24px 0;
+}
+
+.rich-editor-content p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
 }

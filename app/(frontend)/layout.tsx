@@ -43,6 +43,9 @@ export default async function FrontendLayout({ children }: { children: React.Rea
       navigation={data.navigation}
       footerDesc={data.siteContent.footer.description}
       copyright={data.siteContent.footer.copyright}
+      headerLogo={data.headerLogo || ''}
+      headerLogoWidth={data.headerLogoWidth || 315}
+      headerLogoHeight={data.headerLogoHeight || 86}
     >
       {children}
     </FrontendLayoutClient>

@@ -1,17 +1,18 @@
 import React from 'react';
 
 /**
- * Parses plain text with markdown-like formatting into React elements.
- * Supports:
- *   ## Heading
- *   - List item
- *   **bold text**
- *   Blank lines as <br />
- *   Everything else as <p>
+ * Renders content to React elements. Supports both HTML (from TipTap editor)
+ * and plain text with markdown-like formatting (## headings, **bold**, - lists).
  */
-export function renderContent(text: string): React.ReactNode[] {
-  if (!text) return [];
+export function renderContent(text: string): React.ReactNode {
+  if (!text) return null;
 
+  // Detect HTML content (from TipTap / RichTextEditor)
+  if (text.trim().startsWith('<') || /<[a-z][\s\S]*>/i.test(text)) {
+    return <div dangerouslySetInnerHTML={{ __html: text }} />;
+  }
+
+  // Plain text with markdown-like formatting
   return text.split('\n').map((line, i) => {
     if (line.startsWith('## ')) {
       return <h3 key={i} style={{ marginTop: 24, marginBottom: 8 }}>{line.slice(3)}</h3>;
@@ -22,7 +23,6 @@ export function renderContent(text: string): React.ReactNode[] {
     if (line.trim() === '') {
       return <br key={i} />;
     }
-    // Parse **bold** markers by splitting on regex and returning mixed array
     const parts = line.split(/(\*\*.+?\*\*)/g);
     const children = parts.map((part, j) => {
       if (part.startsWith('**') && part.endsWith('**')) {

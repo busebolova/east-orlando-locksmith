@@ -2,6 +2,7 @@ import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { getData, getPage, savePage } from '@/lib/data';
 import PageEditorClient from '../PageEditorClient';
+import PageSectionsEditor from '@/components/PageSectionsEditor';
 
 export default async function EditPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -17,10 +18,18 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
     const content = formData.get('content') as string;
     const seoKeywords = formData.get('seoKeywords') as string;
     const published = formData.get('published') === 'on';
+    let sections = undefined;
+    try {
+      const raw = formData.get('pageSections') as string;
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Object.keys(parsed).length > 0) sections = parsed;
+      }
+    } catch { /* invalid JSON, ignore */ }
 
     const currentPage = await getPage(page!.slug);
     if (!currentPage) throw new Error('Page not found');
-    await savePage(currentPage.slug, { title, description, content, seoKeywords, published });
+    await savePage(currentPage.slug, { title, description, content, seoKeywords, published, sections });
     redirect('/admin/pages');
   }
 
@@ -61,6 +70,16 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
                 pageService={page.service}
                 pageLocation={page.location}
               />
+
+              <div style={{ marginTop: 32 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 16, borderBottom: '2px solid #e6a329', paddingBottom: 8 }}>
+                  Sayfa Bölümleri (Sections)
+                </h3>
+                <p style={{ fontSize: 13, color: '#6b7280', marginBottom: 16 }}>
+                  Her sayfanın ön yüzde görünen bölümlerini buradan düzenleyin. Boş bırakılan alanlar varsayılan içerikle gösterilir.
+                </p>
+                <PageSectionsEditor initialSections={page.sections} />
+              </div>
 
               {page.location && (
                 <div className="form-row">

@@ -1,6 +1,19 @@
 'use client';
 
+import { useState, useMemo } from 'react';
 import AIContentGenerator from './AIContentGenerator';
+import RichTextEditor from '@/components/RichTextEditor';
+
+function textToHtml(text: string): string {
+  if (!text) return '';
+  if (/<[a-z][\s\S]*>/i.test(text)) return text;
+  return text.split('\n').map((line) => {
+    if (line.startsWith('## ')) return `<h3>${line.slice(3)}</h3>`;
+    if (line.startsWith('- ')) return `<li>${line.slice(2)}</li>`;
+    if (line.trim() === '') return '<br />';
+    return `<p>${line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`;
+  }).join('\n');
+}
 
 interface Props {
   defaultTitle?: string;
@@ -27,14 +40,16 @@ export default function BlogForm({
   postId,
   formAction,
 }: Props) {
+  const initialHtml = useMemo(() => textToHtml(defaultContent || ''), [defaultContent]);
+  const [htmlContent, setHtmlContent] = useState(initialHtml);
+
   const handleAIContent = (content: string, title?: string, description?: string) => {
     const titleEl = document.querySelector<HTMLInputElement>('input[name="title"]');
     const descEl = document.querySelector<HTMLTextAreaElement>('textarea[name="description"]');
-    const contentEl = document.querySelector<HTMLTextAreaElement>('textarea[name="content"]');
 
     if (title && titleEl) titleEl.value = title;
     if (description && descEl) descEl.value = description;
-    if (content && contentEl) contentEl.value = content;
+    if (content) setHtmlContent(textToHtml(content));
   };
 
   return (
@@ -89,11 +104,15 @@ export default function BlogForm({
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
           <label style={{ margin: 0, fontWeight: 600 }}>Blog Icerigi</label>
         </div>
-        <textarea name="content" className="form-control" rows={slug ? 20 : 15} defaultValue={defaultContent}
-          placeholder="Blog içeriğini buraya yazın... ## ile baslik, **kalın** ve - liste elemani kullanabilirsiniz."
-          style={{ fontFamily: 'monospace', fontSize: 13, lineHeight: 1.6, minHeight: 300 }} required />
+        <RichTextEditor
+          value={htmlContent}
+          onChange={(html) => setHtmlContent(html)}
+          placeholder="Blog içeriğini buraya yazın..."
+          minHeight={300}
+        />
+        <input type="hidden" name="content" value={htmlContent} />
         <div style={{ fontSize: 11, color: '#9ca3af', marginTop: 4 }}>
-          ## Baslik  **kalin yazi**  - liste elemani  kullanabilirsiniz.
+          Zengin metin düzenleyicisini kullanarak içeriğinizi biçimlendirin.
         </div>
       </div>
 

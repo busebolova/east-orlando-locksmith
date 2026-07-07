@@ -19,6 +19,9 @@ interface FrontendLayoutProps {
   navigation: NavGroup;
   footerDesc: string;
   copyright: string;
+  headerLogo: string;
+  headerLogoWidth: number;
+  headerLogoHeight: number;
 }
 
 export default function FrontendLayoutClient({
@@ -34,8 +37,12 @@ export default function FrontendLayoutClient({
   navigation,
   footerDesc,
   copyright,
+  headerLogo,
+  headerLogoWidth,
+  headerLogoHeight,
 }: FrontendLayoutProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -48,6 +55,10 @@ export default function FrontendLayoutClient({
   }, []);
 
   const navGroups = Object.entries(navigation);
+
+  const toggleDropdown = (name: string) => {
+    setOpenDropdown(openDropdown === name ? null : name);
+  };
 
   return (
     <>
@@ -79,7 +90,7 @@ export default function FrontendLayoutClient({
 
         <nav className="navbar" aria-label="Primary navigation">
           <Link className="brand" href="/" aria-label={`${siteName} home`}>
-            <img src="/assets/logo-crop.png" alt={siteName} />
+            <img src={headerLogo || '/assets/logo-crop.png'} alt={siteName} width={headerLogoWidth || 315} height={headerLogoHeight || 86} />
           </Link>
 
           <button
@@ -96,11 +107,19 @@ export default function FrontendLayoutClient({
 
           <div className={`nav-links ${menuOpen ? 'is-open' : ''}`} id="navLinks">
             {navGroups.map(([groupName, items]) => (
-              <div key={groupName} className="nav-item">
-                <a href={`/${items[0]?.slug || '#'}`}>
-                  {groupName.charAt(0).toUpperCase() + groupName.slice(1)} <span>⌄</span>
+              <div key={groupName} className={`nav-item ${openDropdown === groupName ? 'dropdown-open' : ''}`}>
+                <a
+                  href={items.length === 1 ? `/${items[0].slug}` : '#'}
+                  onClick={(e) => {
+                    if (items.length > 1) {
+                      e.preventDefault();
+                      toggleDropdown(groupName);
+                    }
+                  }}
+                >
+                  {groupName.charAt(0).toUpperCase() + groupName.slice(1)} <span>{openDropdown === groupName ? '⌃' : '⌄'}</span>
                 </a>
-                <div className="dropdown">
+                <div className={`dropdown ${openDropdown === groupName ? 'is-open' : ''}`}>
                   {items.map((item) => (
                     <Link key={item.slug} href={`/${item.slug}`}>
                       {item.label}
@@ -110,17 +129,10 @@ export default function FrontendLayoutClient({
               </div>
             ))}
 
-            <Link className="nav-search-link" href="/search" aria-label="Search">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.5 14h-.8l-.3-.3a6.5 6.5 0 0 0 1.6-4.2 6.5 6.5 0 1 0-6.5 6.5c1.6 0 3-.6 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14Z"/></svg>
-              <span>Search</span>
+            <Link className="nav-blog-link" href="/blog">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h10v2H4v-2zm0 4h16v2H4v-2zm13-4h3v6h-3v-6z"/></svg>
+              <span>Blog</span>
             </Link>
-
-            <a className="nav-phone btn btn-gold" href={`tel:${phoneRaw}`}>
-              <span className="header-phone" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-3.2c.3-.4.7-.5 1.1-.3 1.2.5 2.5.8 3.8.9.5 0 .9.4.9.9v3.3c0 .5-.4 1-.9 1C9.4 20.5 3.5 14.6 3 6.7c0-.5.4-.9.9-.9h3.3c.5 0 .9.4.9.9.1 1.3.4 2.6.9 3.8.1.4 0 .9-.3 1.1L6.6 10.8Z"/></svg>
-              </span>
-              {phone}
-            </a>
           </div>
         </nav>
       </header>
@@ -130,7 +142,7 @@ export default function FrontendLayoutClient({
       <footer className="site-footer">
         <div className="footer-grid">
           <div>
-            <img src="/assets/logo-crop.png" alt={siteName} />
+            <img src={headerLogo || '/assets/logo-crop.png'} alt={siteName} width={headerLogoWidth || 315} height={headerLogoHeight || 86} style={{ maxWidth: 220, height: 'auto' }} />
             <p>{footerDesc}</p>
             <a className="footer-phone" href={`tel:${phoneRaw}`}>{phone}</a>
           </div>
@@ -166,10 +178,10 @@ export default function FrontendLayoutClient({
           <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
           <span>Home</span>
         </Link>
-        <Link href="/search" className={`bottom-nav-item ${pathname === '/search' ? 'active' : ''}`}>
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M15.5 14h-.8l-.3-.3a6.5 6.5 0 0 0 1.6-4.2 6.5 6.5 0 1 0-6.5 6.5c1.6 0 3-.6 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14Z"/></svg>
-          <span>Search</span>
-        </Link>
+        <a href={`tel:${phoneRaw}`} className="bottom-nav-item bottom-nav-call">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-3.2c.3-.4.7-.5 1.1-.3 1.2.5 2.5.8 3.8.9.5 0 .9.4.9.9v3.3c0 .5-.4 1-.9 1C9.4 20.5 3.5 14.6 3 6.7c0-.5.4-.9.9-.9h3.3c.5 0 .9.4.9.9.1 1.3.4 2.6.9 3.8.1.4 0 .9-.3 1.1L6.6 10.8Z"/></svg>
+          <span>Call Now</span>
+        </a>
       </nav>
     </>
   );

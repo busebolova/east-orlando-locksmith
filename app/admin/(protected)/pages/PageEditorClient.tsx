@@ -1,6 +1,18 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
+import RichTextEditor from '@/components/RichTextEditor';
+
+function textToHtml(text: string): string {
+  if (!text) return '';
+  if (/<[a-z][\s\S]*>/i.test(text)) return text;
+  return text.split('\n').map((line) => {
+    if (line.startsWith('## ')) return `<h3>${line.slice(3)}</h3>`;
+    if (line.startsWith('- ')) return `<li>${line.slice(2)}</li>`;
+    if (line.trim() === '') return '<br />';
+    return `<p>${line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`;
+  }).join('\n');
+}
 
 interface PageEditorClientProps {
   initialContent: string;
@@ -15,7 +27,8 @@ export default function PageEditorClient({
   pageService,
   pageLocation,
 }: PageEditorClientProps) {
-  const [content, setContent] = useState(initialContent || '');
+  const initialHtml = useMemo(() => textToHtml(initialContent || ''), [initialContent]);
+  const [htmlContent, setHtmlContent] = useState(initialHtml);
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState('');
   const [seoError, setSeoError] = useState('');
@@ -35,7 +48,7 @@ export default function PageEditorClient({
     const currentTitle = getCurrentTitle();
 
     try {
-      const prompt = `Write SEO-optimized body content for a locksmith service page titled "${currentTitle}".${pageService ? ` Service: ${pageService}.` : ''}${pageLocation ? ` Location: ${pageLocation}.` : ''} Include 2-3 sections with headings. Write in a professional, trustworthy tone. Focus on what the customer needs to know. Return ONLY plain text content with sections. Use **bold** for emphasis and format section titles with ## on their own line.`;
+      const prompt = `Write SEO-optimized body content for a locksmith service page titled "${currentTitle}".${pageService ? ` Service: ${pageService}.` : ''}${pageLocation ? ` Location: ${pageLocation}.` : ''} Include 2-3 sections with headings. Write in a professional, trustworthy tone. Focus on what the customer needs to know. Return ONLY plain text with ## for headings, **bold** for emphasis, and - for list items. No HTML.`;
 
       const res = await fetch('/api/ai/generate', {
         method: 'POST',
@@ -52,7 +65,7 @@ export default function PageEditorClient({
         .replace(/\n{3,}/g, '\n\n')
         .trim();
 
-      setContent(text);
+      setHtmlContent(textToHtml(text));
     } catch (err) {
       setAiError(err instanceof Error ? err.message : 'Bir hata oluştu');
     } finally {
@@ -65,7 +78,6 @@ export default function PageEditorClient({
     setSeoError('');
 
     const currentTitle = getCurrentTitle();
-    const currentContent = content || initialContent;
 
     try {
       const prompt = `Generate a list of relevant SEO keywords and phrases for a locksmith page titled "${currentTitle}" serving ${pageLocation || 'Orlando'} area.${pageService ? ` Service: ${pageService}.` : ''} Include location-based keywords, service keywords, and long-tail phrases. Return as a comma-separated list of keywords.`;
@@ -85,7 +97,7 @@ export default function PageEditorClient({
     } finally {
       setSeoLoading(false);
     }
-  }, [content, initialContent, pageService, pageLocation, getCurrentTitle]);
+  }, [pageLocation, pageService, getCurrentTitle]);
 
   return (
     <>
@@ -103,18 +115,17 @@ export default function PageEditorClient({
           </button>
         </div>
 
-        <textarea
-          name="content"
-          className="form-control"
-          rows={16}
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Sayfa içeriğini buraya yazın... Basit metin olarak. ## ile baslik, **kalın** ve - liste elemani kullanabilirsiniz."
-          style={{ fontFamily: 'monospace', fontSize: 13, lineHeight: 1.6, minHeight: 300 }}
+        <RichTextEditor
+          value={htmlContent}
+          onChange={(html) => setHtmlContent(html)}
+          placeholder="Sayfa içeriğini buraya yazın..."
+          minHeight={300}
         />
 
+        <input type="hidden" name="content" value={htmlContent} />
+
         <div style={{ fontSize: 11, color: '#9ca3af', marginTop: 4 }}>
-          ## Baslik  **kalin yazi**  - liste elemani  kullanabilirsiniz.
+          Zengin metin düzenleyicisini kullanarak içeriğinizi biçimlendirin.
         </div>
       </div>
 

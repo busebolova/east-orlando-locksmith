@@ -43,6 +43,9 @@ export default async function ProtectedLayout({ children }: { children: React.Re
           <Link href="/admin/settings">
             Settings
           </Link>
+          <Link href="/admin/header-settings">
+            Header Settings
+          </Link>
           <Link href="/admin/password">
             Password
           </Link>

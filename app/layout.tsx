@@ -11,10 +11,14 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   let gaId = '';
   let scVerification = '';
+  let faviconUrl = '';
+  let logoUrl = '';
   try {
     const data = await getData();
     gaId = data.googleAnalyticsId || '';
     scVerification = data.googleSearchConsoleVerification || '';
+    faviconUrl = data.favicon || '';
+    logoUrl = data.headerLogo || '';
   } catch {}
 
   return (
@@ -25,8 +29,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="/styles.css" />
         <link rel="stylesheet" href="/seo-pages.css" />
-        {scVerification && (
-          <meta name="google-site-verification" content={scVerification} />
+        {faviconUrl ? <link rel="icon" href={faviconUrl} /> : <link rel="icon" href="/favicon.ico" />}
+        {scVerification && (<meta name="google-site-verification" content={scVerification} />
         )}
         {gaId && (
           <>
@@ -41,7 +45,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             "@context": "https://schema.org",
             "@type": "Locksmith",
             "name": "East Orlando Locksmith",
-            "image": "https://eastorlandolocksmith.com/assets/hero-locksmith.png",
+            "image": "https://eastorlandolocksmith.com${logoUrl || '/assets/hero-locksmith.png'}",
             "telephone": "+14075555625",
             "email": "info@eastorlandolocksmith.com",
             "description": "24/7 emergency locksmith service in East Orlando. Car key replacement, home lockouts, rekeying, and commercial locksmith services.",
