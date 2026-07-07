@@ -1,6 +1,6 @@
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getData, savePage } from '@/lib/data';
+import { getData } from '@/lib/data';
 import PageEditorClient from '../PageEditorClient';
 import PageSectionsEditor from '@/components/PageSectionsEditor';
 
@@ -11,26 +11,6 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
 
   if (!page) notFound();
 
-  async function handleUpdate(formData: FormData) {
-    'use server';
-    const title = formData.get('title') as string;
-    const description = formData.get('description') as string;
-    const content = formData.get('content') as string;
-    const seoKeywords = formData.get('seoKeywords') as string;
-    const published = formData.get('published') === 'on';
-    let sections = undefined;
-    try {
-      const raw = formData.get('pageSections') as string;
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Object.keys(parsed).length > 0) sections = parsed;
-      }
-    } catch { /* invalid JSON, ignore */ }
-
-    await savePage(page!.slug, { title, description, content, seoKeywords, published, sections });
-    redirect('/admin/pages');
-  }
-
   return (
     <>
       <div className="topbar-admin">
@@ -40,7 +20,9 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
       <div className="page-content">
         <div className="card">
           <div className="card-body">
-            <form action={handleUpdate}>
+            <form action="/api/save-page-form" method="POST">
+              <input type="hidden" name="slug" value={page.slug} />
+
               <div className="form-group">
                 <label>Page Title (H1)</label>
                 <input type="text" name="title" className="form-control" defaultValue={page.title} required />
@@ -117,6 +99,7 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
                 <button type="submit" className="btn btn-primary">Save Changes</button>
                 <Link href="/admin/pages" className="btn btn-secondary">Cancel</Link>
               </div>
+
             </form>
           </div>
         </div>

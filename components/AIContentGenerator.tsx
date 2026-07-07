@@ -100,7 +100,7 @@ DESCRIPTION: <meta description>
           disabled={generating || !prompt.trim()}
           style={{ whiteSpace: 'nowrap', background: '#e6a329', color: '#071321', fontWeight: 600 }}
         >
-          {generating ? 'Generating...' : 'Generate with AI'}
+          {generating ? <><span className="spinner" />Generating...</> : 'Generate with AI'}
         </button>
       </div>
       {error && (

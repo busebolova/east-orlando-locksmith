@@ -67,7 +67,7 @@ export default function PageEditorClient({
 
       setHtmlContent(textToHtml(text));
     } catch (err) {
-      setAiError(err instanceof Error ? err.message : 'Bir hata oluştu');
+      setAiError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setAiLoading(false);
     }
@@ -93,7 +93,7 @@ export default function PageEditorClient({
 
       setSeoKeywords(data.content.replace(/<\/?[^>]+(>|$)/g, '').trim());
     } catch (err) {
-      setSeoError(err instanceof Error ? err.message : 'Bir hata oluştu');
+      setSeoError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setSeoLoading(false);
     }
@@ -111,7 +111,7 @@ export default function PageEditorClient({
             disabled={aiLoading}
             style={{ background: '#e6a329', color: '#071321', border: 'none', fontWeight: 600 }}
           >
-            {aiLoading ? 'Oluşturuluyor...' : 'AI ile Üret'}
+            {aiLoading ? <><span className="spinner" />Generating...</> : 'AI ile Üret'}
           </button>
         </div>
 
@@ -139,7 +139,7 @@ export default function PageEditorClient({
             disabled={seoLoading}
             style={{ background: '#e6a329', color: '#071321', border: 'none', fontWeight: 600 }}
           >
-            {seoLoading ? 'Oluşturuluyor...' : 'AI ile SEO Üret'}
+            {seoLoading ? <><span className="spinner" />Generating SEO...</> : 'AI ile SEO Üret'}
           </button>
         </div>
         <textarea

@@ -56,7 +56,7 @@ export default function HomepageEditorClient({
 
       setHtmlContent(textToHtml(text));
     } catch (err) {
-      setAiError(err instanceof Error ? err.message : 'Bir hata oluştu');
+      setAiError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setAiLoading(false);
     }
@@ -74,7 +74,7 @@ export default function HomepageEditorClient({
             disabled={aiLoading}
             style={{ background: '#e6a329', color: '#071321', border: 'none', fontWeight: 600 }}
           >
-            {aiLoading ? 'Oluşturuluyor...' : 'AI ile Üret'}
+            {aiLoading ? <><span className="spinner" />Generating...</> : 'AI ile Üret'}
           </button>
         </div>
 

@@ -86,7 +86,7 @@ function renderField(
 function AiButton({ onClick, loading, label }: { onClick: () => void; loading: boolean; label?: string }) {
   return (
     <button type="button" style={AI_BTN_STYLE} onClick={onClick} disabled={loading}>
-      {loading ? '...' : label || 'AI ile Üret'}
+      {loading ? <><span className="spinner" />Generating...</> : label || 'AI ile Üret'}
     </button>
   );
 }
