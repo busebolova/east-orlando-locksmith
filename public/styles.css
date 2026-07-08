@@ -1838,57 +1838,44 @@ summary,
   margin: 0;
 }
 
-.header-phone-link {
+.nav-call-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   color: #fff;
   background: var(--gold);
-  padding: 5px 14px;
+  padding: 6px 16px;
   border-radius: 6px;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   transition: background 0.2s;
+  white-space: nowrap;
 }
 
-.header-phone-link:hover {
+.nav-call-link:hover {
   background: var(--gold-dark);
 }
 
-.header-phone-icon {
+.nav-call-icon {
   display: inline-grid;
   place-items: center;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: #fff;
-}
-
-.header-phone-text {
-  color: #fff;
-}
-
-.header-contact-top {
-  color: var(--ink);
-  text-decoration: none;
-  font-size: 12.5px;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.header-contact-top:hover {
-  color: var(--gold-dark);
 }
 
 @media (max-width: 860px) {
-  .header-phone-link {
-    padding: 4px 10px;
-    font-size: 11px;
+  .nav-call-link {
+    display: flex;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 16px;
+    margin: 8px 16px;
+    border-radius: 10px;
   }
-  .header-phone-text {
-    display: none;
-  }
-  .header-contact-top {
-    display: none;
+  .nav-call-icon {
+    width: 20px;
+    height: 20px;
   }
 }

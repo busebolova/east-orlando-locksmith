@@ -87,13 +87,6 @@ export default function FrontendLayoutClient({
               <svg viewBox="0 0 48 48" width="24" height="24"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A22.96 22.96 0 0 0 2 24c0 3.59.83 7.04 2.34 10.18l7.35-6z"/><path fill="#EA4335" d="M24 9.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 3.18 29.93 1 24 1 15.4 1 7.96 5.93 4.34 13.82l7.35 6c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
             </span>
             <span className="social-dot">✣</span>
-            <a className="header-phone-link" href={`tel:${phoneRaw}`} aria-label="Call us">
-              <span className="header-phone-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8.2 5.2 10 9.3l-2 1.4c1.3 2.7 3.5 4.9 6.3 6.3l1.4-2 4.1 1.8c.5.2.7.7.6 1.2l-.5 2.2c-.1.6-.7 1-1.3.9C10.5 20.5 3.5 13.5 2.9 5.4c-.1-.6.3-1.2.9-1.3L6 3.6c.5-.1 1 .1 1.2.6Z"></path></svg>
-              </span>
-              <span className="header-phone-text">Call Now</span>
-            </a>
-            <Link className="header-contact-top" href="/contact">Contact</Link>
           </div>
         </div>
 
@@ -144,6 +137,12 @@ export default function FrontendLayoutClient({
             <Link className="nav-contact-link" href="/contact">
               <span>Contact Us</span>
             </Link>
+            <a className="nav-call-link" href={`tel:${phoneRaw}`} aria-label="Call us">
+              <span className="nav-call-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8.2 5.2 10 9.3l-2 1.4c1.3 2.7 3.5 4.9 6.3 6.3l1.4-2 4.1 1.8c.5.2.7.7.6 1.2l-.5 2.2c-.1.6-.7 1-1.3.9C10.5 20.5 3.5 13.5 2.9 5.4c-.1-.6.3-1.2.9-1.3L6 3.6c.5-.1 1 .1 1.2.6Z"></path></svg>
+              </span>
+              <span>Call Now</span>
+            </a>
           </div>
         </nav>
       </header>
