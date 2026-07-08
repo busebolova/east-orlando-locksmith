@@ -285,6 +285,7 @@ a {
   width: min(552px, calc(100% - 48px));
   margin-left: max(24px, calc((100vw - 1258px) / 2));
   padding-top: 85px;
+  padding-bottom: 50px;
   position: relative;
   z-index: 10;
 }
@@ -433,6 +434,7 @@ h1 span {
 }
 
 .hero-actions {
+  display: flex;
   flex-wrap: wrap;
   gap: 13px;
   margin-bottom: 32px;
@@ -444,6 +446,7 @@ h1 span {
 }
 
 .trust-row {
+  display: flex;
   flex-wrap: wrap;
   gap: 26px;
   color: #131a25;
