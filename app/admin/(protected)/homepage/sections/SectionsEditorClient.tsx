@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import RichTextEditor from '@/components/RichTextEditor';
 
 type HeroImage = { src: string; alt: string };
 type TrustItem = { text: string };
@@ -16,6 +17,10 @@ interface HomepageData {
   pill: string;
   heading: string;
   heroImage: HeroImage;
+  heroSubtitle?: string;
+  heroDescription?: string;
+  callButtonText?: string;
+  servicesButtonText?: string;
   trustItems: TrustItem[];
   priorityEyebrow: string;
   priorityHeading: string;
@@ -346,6 +351,13 @@ export default function SectionsEditorClient({ initialData }: Props) {
     </div>
   );
 
+  const renderRichTextField = (label: string, value: string, onChange: (v: string) => void, placeholder?: string) => (
+    <div style={ROW_STYLE}>
+      <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 3 }}>{label}</label>
+      <RichTextEditor value={value} onChange={onChange} placeholder={placeholder || ''} minHeight={150} />
+    </div>
+  );
+
   return (
     <>
       <input type="hidden" name="homepageData" value={JSON.stringify(data)} />
@@ -374,6 +386,13 @@ export default function SectionsEditorClient({ initialData }: Props) {
               }} style={{ fontSize: 13 }} />
             </div>
             {renderField('Hero Image Alt', data.heroImage.alt, v => { setData(prev => ({ ...prev, heroImage: { ...prev.heroImage, alt: v } })) }, { placeholder: 'Locksmith repairing a door lock at night' })}
+            {renderField('Hero Subtitle', data.heroSubtitle || '', v => { setData(prev => ({ ...prev, heroSubtitle: v })) }, { placeholder: 'East Orlando\'s Trusted Emergency Locksmith', rows: 2 })}
+            <div style={ROW_STYLE}>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 3 }}>Hero Description</label>
+              <RichTextEditor value={data.heroDescription || ''} onChange={v => setData(prev => ({ ...prev, heroDescription: v }))} placeholder={'Describe your locksmith service...'} minHeight={150} />
+            </div>
+            {renderField('Call Button Text', data.callButtonText || '', v => { setData(prev => ({ ...prev, callButtonText: v })) }, { placeholder: `Call ${'(407) 555-5625'}` })}
+            {renderField('Services Button Text', data.servicesButtonText || '', v => { setData(prev => ({ ...prev, servicesButtonText: v })) }, { placeholder: 'View Services' })}
           </div>
         )}
       </div>
@@ -414,7 +433,7 @@ export default function SectionsEditorClient({ initialData }: Props) {
           <div style={BODY_STYLE}>
             {renderField('Eyebrow', data.priorityEyebrow, v => { setData(prev => ({ ...prev, priorityEyebrow: v })) }, { placeholder: 'Trusted By Thousands' })}
             {renderField('Heading', data.priorityHeading, v => { setData(prev => ({ ...prev, priorityHeading: v })) }, { placeholder: 'Your Security is Our Priority' })}
-            {renderField('Text', data.priorityText, v => { setData(prev => ({ ...prev, priorityText: v })) }, { placeholder: 'We understand that security...', rows: 3 })}
+            {renderRichTextField('Text', data.priorityText, v => { setData(prev => ({ ...prev, priorityText: v })) }, 'We understand that security...')}
           </div>
         )}
       </div>
@@ -458,7 +477,7 @@ export default function SectionsEditorClient({ initialData }: Props) {
           <div style={BODY_STYLE}>
             {renderField('Eyebrow', data.servicesEyebrow, v => { setData(prev => ({ ...prev, servicesEyebrow: v })) }, { placeholder: 'Locksmith Services' })}
             {renderField('Heading', data.servicesHeading, v => { setData(prev => ({ ...prev, servicesHeading: v })) }, { placeholder: 'Complete locksmith support...' })}
-            {renderField('Text', data.servicesText, v => { setData(prev => ({ ...prev, servicesText: v })) }, { placeholder: 'From car key issues...', rows: 3 })}
+            {renderRichTextField('Text', data.servicesText, v => { setData(prev => ({ ...prev, servicesText: v })) }, 'From car key issues...')}
 
             <div style={{ borderTop: '1px solid #e5e7eb', marginTop: 16, paddingTop: 12 }}>
               <h4 style={{ fontSize: 13, fontWeight: 600, marginBottom: 12 }}>Service Cards ({data.serviceCards.length})</h4>
@@ -500,7 +519,7 @@ export default function SectionsEditorClient({ initialData }: Props) {
           <div style={BODY_STYLE}>
             {renderField('Eyebrow', data.trustEyebrow, v => { setData(prev => ({ ...prev, trustEyebrow: v })) }, { placeholder: 'Why Choose Us' })}
             {renderField('Heading', data.trustHeading, v => { setData(prev => ({ ...prev, trustHeading: v })) }, { placeholder: 'Built for urgent calls...' })}
-            {renderField('Text', data.trustText, v => { setData(prev => ({ ...prev, trustText: v })) }, { placeholder: 'Every visit is designed...', rows: 3 })}
+            {renderRichTextField('Text', data.trustText, v => { setData(prev => ({ ...prev, trustText: v })) }, 'Every visit is designed...')}
             <div style={{ borderTop: '1px solid #e5e7eb', marginTop: 16, paddingTop: 12 }}>
               {data.trustCards.map((card, i) => (
                 <div key={i} style={{ border: '1px solid #e5e7eb', borderRadius: 6, padding: 12, marginBottom: 12, background: '#fafafa' }}>
@@ -529,7 +548,7 @@ export default function SectionsEditorClient({ initialData }: Props) {
           <div style={BODY_STYLE}>
             {renderField('Eyebrow', data.areasEyebrow, v => { setData(prev => ({ ...prev, areasEyebrow: v })) }, { placeholder: 'Service Areas' })}
             {renderField('Heading', data.areasHeading, v => { setData(prev => ({ ...prev, areasHeading: v })) }, { placeholder: 'Local locksmith coverage...' })}
-            {renderField('Text', data.areasText, v => { setData(prev => ({ ...prev, areasText: v })) }, { placeholder: 'Our dispatch pattern...', rows: 2 })}
+            {renderRichTextField('Text', data.areasText, v => { setData(prev => ({ ...prev, areasText: v })) }, 'Our dispatch pattern...')}
             <div style={{ borderTop: '1px solid #e5e7eb', marginTop: 12, paddingTop: 12 }}>
               <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 6 }}>Extra Areas</label>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
@@ -633,7 +652,7 @@ export default function SectionsEditorClient({ initialData }: Props) {
           <div style={BODY_STYLE}>
             {renderField('Eyebrow', data.brandsEyebrow, v => { setData(prev => ({ ...prev, brandsEyebrow: v })) }, { placeholder: 'Vehicle Brands' })}
             {renderField('Heading', data.brandsHeading, v => { setData(prev => ({ ...prev, brandsHeading: v })) }, { placeholder: 'Automotive locksmith support...' })}
-            {renderField('Text', data.brandsText, v => { setData(prev => ({ ...prev, brandsText: v })) }, { placeholder: 'Key replacement and programming...', rows: 2 })}
+            {renderRichTextField('Text', data.brandsText, v => { setData(prev => ({ ...prev, brandsText: v })) }, 'Key replacement and programming...')}
             <div style={{ borderTop: '1px solid #e5e7eb', marginTop: 12, paddingTop: 12 }}>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
                 {data.brands.map((brand, i) => (
@@ -705,7 +724,7 @@ export default function SectionsEditorClient({ initialData }: Props) {
           <div style={BODY_STYLE}>
             {renderField('Eyebrow', data.ctaEyebrow, v => { setData(prev => ({ ...prev, ctaEyebrow: v })) }, { placeholder: 'Emergency Ready' })}
             {renderField('Heading', data.ctaHeading, v => { setData(prev => ({ ...prev, ctaHeading: v })) }, { placeholder: 'Need a locksmith right now?' })}
-            {renderField('Text', data.ctaText, v => { setData(prev => ({ ...prev, ctaText: v })) }, { placeholder: 'A real technician is ready to help...', rows: 3 })}
+            {renderRichTextField('Text', data.ctaText, v => { setData(prev => ({ ...prev, ctaText: v })) }, 'A real technician is ready to help...')}
           </div>
         )}
       </div>

@@ -79,11 +79,10 @@ export default async function FrontendPage({ params }: { params: Promise<{ slug:
             {page.zip && <span>ZIP {page.zip}</span>}
           </div>
           <div className="seo-actions">
-            <a className="btn btn-light btn-large" href={`tel:${data.phoneRaw}`}>
-              <span className="header-phone" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.2 5.2 10 9.3l-2 1.4c1.3 2.7 3.5 4.9 6.3 6.3l1.4-2 4.1 1.8c.5.2.7.7.6 1.2l-.5 2.2c-.1.6-.7 1-1.3.9C10.5 20.5 3.5 13.5 2.9 5.4c-.1-.6.3-1.2.9-1.3L6 3.6c.5-.1 1 .1 1.2.6Z"></path></svg></span>
+            <a className="btn btn-hero-call btn-large" href={`tel:${data.phoneRaw}`}>
+              <span className="header-phone btn-phone-pulse" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.2 5.2 10 9.3l-2 1.4c1.3 2.7 3.5 4.9 6.3 6.3l1.4-2 4.1 1.8c.5.2.7.7.6 1.2l-.5 2.2c-.1.6-.7 1-1.3.9C10.5 20.5 3.5 13.5 2.9 5.4c-.1-.6.3-1.2.9-1.3L6 3.6c.5-.1 1 .1 1.2.6Z"></path></svg></span>
               Call {data.phone}
             </a>
-            <a className="btn btn-outline btn-large" href="/seo-index">View Services <span className="arrow">›</span></a>
           </div>
         </div>
         <figure className="seo-visual-card">
@@ -192,7 +191,7 @@ export default async function FrontendPage({ params }: { params: Promise<{ slug:
         {(page.sections?.faqItems && page.sections.faqItems.length > 0
           ? page.sections.faqItems
           : [
-              { question: `How fast can a locksmith reach ${page.location || 'Orlando'}?`, answer: `Most ${page.location ? page.location : 'Orlando'} calls are routed to the closest available technician. Arrival depends on traffic and call volume, but jobs in and around ${page.location || 'East Orlando'} typically fit a 15 to 30 minute arrival target.` },
+              { question: `How fast can a locksmith reach ${page.location || 'Orlando'}?`, answer: `Most ${page.location ? page.location : 'Orlando'} calls are routed to the closest available technician. Get instant service — call now for professional ${page.service ? page.service.toLowerCase() : 'locksmith'} help.` },
               { question: 'Can you unlock my door without replacing the lock?', answer: 'Many house, apartment, and car lockouts can be opened without replacing hardware. If the lock is damaged, worn, or unsafe, the technician will explain repair and replacement options before starting any work.' },
               { question: `Do you provide ${page.service || 'locksmith'} services after hours?`, answer: `Yes. We handle ${page.service ? page.service.toLowerCase() : 'locksmith'} calls, lockouts, rekeys, and lock changes around the clock — including nights, weekends, and holidays.` },
             ]

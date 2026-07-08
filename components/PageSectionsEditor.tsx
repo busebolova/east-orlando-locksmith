@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import type { PageSections, PageFaqItem } from '@/lib/data';
+import RichTextEditor from '@/components/RichTextEditor';
 
 interface Props {
   initialSections?: PageSections;
@@ -83,6 +84,15 @@ function renderField(
   );
 }
 
+function renderRichTextField(label: string, value: string | undefined, onChange: (v: string) => void, placeholder?: string) {
+  return (
+    <div style={ROW_STYLE}>
+      <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 3 }}>{label}</label>
+      <RichTextEditor value={value ?? ''} onChange={onChange} placeholder={placeholder || ''} minHeight={150} />
+    </div>
+  );
+}
+
 function AiButton({ onClick, loading, label }: { onClick: () => void; loading: boolean; label?: string }) {
   return (
     <button type="button" style={AI_BTN_STYLE} onClick={onClick} disabled={loading}>
@@ -160,7 +170,7 @@ export default function PageSectionsEditor({ initialSections, pageTitle, pageSer
       faqEyebrow: 'Questions People Search Before Calling',
       faqHeading: 'FAQ',
       faqItems: [
-        { question: `How fast can a locksmith reach ${loc}?`, answer: `Most ${loc} calls are routed to the closest available technician. Arrival depends on traffic and call volume, but jobs in and around ${loc} typically fit a 15 to 30 minute arrival target.` },
+        { question: `How fast can a locksmith reach ${loc}?`, answer: `Most ${loc} calls are routed to the closest available technician. Get instant service — call now for professional locksmith help.` },
         { question: 'Can you unlock my door without replacing the lock?', answer: 'Many house, apartment, and car lockouts can be opened without replacing hardware. If the lock is damaged, worn, or unsafe, the technician will explain repair and replacement options before starting any work.' },
         { question: `Do you provide ${svc.toLowerCase()} services after hours?`, answer: `Yes. We handle ${svc.toLowerCase()} calls, lockouts, rekeys, and lock changes around the clock — including nights, weekends, and holidays.` },
       ],
@@ -424,7 +434,7 @@ TEXT: <value>`);
           <div style={BODY_STYLE}>
             {renderField('Eyebrow', data.introEyebrow, v => setData(prev => ({ ...prev, introEyebrow: v })), { placeholder: 'Overview' })}
             {renderField('Heading', data.introHeading, v => setData(prev => ({ ...prev, introHeading: v })), { placeholder: 'Professional Locksmith Service in Orlando', rows: 2 })}
-            {renderField('Text', data.introText, v => setData(prev => ({ ...prev, introText: v })), { placeholder: 'Trusted locksmith service for the Orlando area...', rows: 3 })}
+            {renderRichTextField('Text', data.introText, v => setData(prev => ({ ...prev, introText: v })), 'Trusted locksmith service for the Orlando area...')}
           </div>
         )}
       </div>
@@ -443,12 +453,12 @@ TEXT: <value>`);
             <div style={{ border: '1px solid #e5e7eb', borderRadius: 6, padding: 12, marginBottom: 12, background: '#fafafa' }}>
               <strong style={{ fontSize: 13 }}>Problem Card</strong>
               {renderField('Heading', data.problemHeading, v => setData(prev => ({ ...prev, problemHeading: v })), { placeholder: 'Problem' })}
-              {renderField('Text', data.problemText, v => setData(prev => ({ ...prev, problemText: v })), { placeholder: 'A lock issue usually arrives at the worst possible time...', rows: 4 })}
+              {renderRichTextField('Text', data.problemText, v => setData(prev => ({ ...prev, problemText: v })), 'A lock issue usually arrives at the worst possible time...')}
             </div>
             <div style={{ border: '1px solid #e5e7eb', borderRadius: 6, padding: 12, background: '#fafafa' }}>
               <strong style={{ fontSize: 13 }}>Solution Card</strong>
               {renderField('Heading', data.solutionHeading, v => setData(prev => ({ ...prev, solutionHeading: v })), { placeholder: 'Solution' })}
-              {renderField('Text', data.solutionText, v => setData(prev => ({ ...prev, solutionText: v })), { placeholder: 'East Orlando Locksmith dispatches a trained technician...', rows: 4 })}
+              {renderRichTextField('Text', data.solutionText, v => setData(prev => ({ ...prev, solutionText: v })), 'East Orlando Locksmith dispatches a trained technician...')}
             </div>
           </div>
         )}
@@ -467,7 +477,7 @@ TEXT: <value>`);
           <div style={BODY_STYLE}>
             {renderField('Eyebrow', data.localEyebrow, v => setData(prev => ({ ...prev, localEyebrow: v })), { placeholder: 'Local Coverage' })}
             {renderField('Heading', data.localHeading, v => setData(prev => ({ ...prev, localHeading: v })), { placeholder: 'Local Expertise Matters' })}
-            {renderField('Text', data.localText, v => setData(prev => ({ ...prev, localText: v })), { placeholder: 'We regularly route technicians through Orlando...', rows: 3 })}
+            {renderRichTextField('Text', data.localText, v => setData(prev => ({ ...prev, localText: v })), 'We regularly route technicians through Orlando...')}
           </div>
         )}
       </div>
@@ -523,7 +533,7 @@ TEXT: <value>`);
           <div style={BODY_STYLE}>
             {renderField('Eyebrow', data.trustEyebrow, v => setData(prev => ({ ...prev, trustEyebrow: v })), { placeholder: 'Trust Signals' })}
             {renderField('Heading', data.trustHeading, v => setData(prev => ({ ...prev, trustHeading: v })), { placeholder: 'Why People Choose East Orlando Locksmith' })}
-            {renderField('Text', data.trustText, v => setData(prev => ({ ...prev, trustText: v })), { placeholder: 'Licensed and insured service, upfront pricing...', rows: 3 })}
+            {renderRichTextField('Text', data.trustText, v => setData(prev => ({ ...prev, trustText: v })), 'Licensed and insured service, upfront pricing...')}
             <div style={{ borderTop: '1px solid #e5e7eb', marginTop: 12, paddingTop: 12 }}>
               <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 6 }}>Trust Badges</label>
               {(data.trustBadges || []).map((badge, i) => (
@@ -570,7 +580,7 @@ TEXT: <value>`);
                     <button type="button" className="btn btn-sm btn-danger" onClick={() => removeFaqItem(i)}>Remove</button>
                   </div>
                   {renderField('Question', item.question, v => updateFaqItem(i, 'question', v))}
-                  {renderField('Answer', item.answer, v => updateFaqItem(i, 'answer', v), { rows: 3 })}
+                  {renderRichTextField('Answer', item.answer, v => updateFaqItem(i, 'answer', v), 'Answer for this FAQ question')}
                 </div>
               ))}
               <button type="button" className="btn btn-sm btn-secondary" onClick={addFaqItem}>+ Add FAQ Item</button>
@@ -592,7 +602,7 @@ TEXT: <value>`);
           <div style={BODY_STYLE}>
             {renderField('Eyebrow', data.ctaEyebrow, v => setData(prev => ({ ...prev, ctaEyebrow: v })), { placeholder: 'Emergency Ready' })}
             {renderField('Heading', data.ctaHeading, v => setData(prev => ({ ...prev, ctaHeading: v })), { placeholder: 'Ready for Locksmith Help?' })}
-            {renderField('Text', data.ctaText, v => setData(prev => ({ ...prev, ctaText: v })), { placeholder: 'Call now for professional locksmith service in Orlando.', rows: 3 })}
+            {renderRichTextField('Text', data.ctaText, v => setData(prev => ({ ...prev, ctaText: v })), 'Call now for professional locksmith service in Orlando.')}
           </div>
         )}
       </div>

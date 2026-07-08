@@ -144,6 +144,10 @@ export type HomepageSections = {
   pill: string;
   heading: string;
   heroImage: HomepageHeroImage;
+  heroSubtitle?: string;
+  heroDescription?: string;
+  callButtonText?: string;
+  servicesButtonText?: string;
   trustItems: HomepageTrustItem[];
   priorityEyebrow: string;
   priorityHeading: string;
