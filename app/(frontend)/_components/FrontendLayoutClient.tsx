@@ -137,12 +137,6 @@ export default function FrontendLayoutClient({
             <Link className="nav-contact-link" href="/contact">
               <span>Contact Us</span>
             </Link>
-            <a className="nav-call-link" href={`tel:${phoneRaw}`} aria-label="Call us">
-              <span className="nav-call-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8.2 5.2 10 9.3l-2 1.4c1.3 2.7 3.5 4.9 6.3 6.3l1.4-2 4.1 1.8c.5.2.7.7.6 1.2l-.5 2.2c-.1.6-.7 1-1.3.9C10.5 20.5 3.5 13.5 2.9 5.4c-.1-.6.3-1.2.9-1.3L6 3.6c.5-.1 1 .1 1.2.6Z"></path></svg>
-              </span>
-              <span>Call Now</span>
-            </a>
           </div>
         </nav>
       </header>
