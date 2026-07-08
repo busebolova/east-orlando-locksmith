@@ -134,6 +134,9 @@ export default function FrontendLayoutClient({
             <Link className="nav-blog-link" href="/blog">
               <span>Blog</span>
             </Link>
+            <Link className="nav-contact-link" href="/contact">
+              <span>Contact Us</span>
+            </Link>
           </div>
         </nav>
       </header>
