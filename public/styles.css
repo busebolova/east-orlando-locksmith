@@ -1059,8 +1059,13 @@ b,
 .stat strong,
 .service-point strong,
 .seo-card strong,
-summary {
+summary,
+.trust-row span {
   font-weight: 500 !important;
+}
+
+.trust-row {
+  font-weight: 700 !important;
 }
 
 .header-icon,
@@ -1833,18 +1838,57 @@ summary {
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .contact-section {
-    grid-template-columns: 1fr;
-    gap: 40px;
+.header-phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  background: var(--gold);
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.header-phone-link:hover {
+  background: var(--gold-dark);
+}
+
+.header-phone-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  color: #fff;
+}
+
+.header-phone-text {
+  color: #fff;
+}
+
+.header-contact-top {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.header-contact-top:hover {
+  color: var(--gold-dark);
+}
+
+@media (max-width: 860px) {
+  .header-phone-link {
+    padding: 4px 10px;
+    font-size: 11px;
   }
-  .form-row {
-    grid-template-columns: 1fr;
+  .header-phone-text {
+    display: none;
   }
-  .contact-info {
-    padding-top: 0;
-  }
-  .contact-content h1 {
-    font-size: 28px;
+  .header-contact-top {
+    display: none;
   }
 }
