@@ -833,6 +833,23 @@ body:has(.admin-layout) {
   .nav-item > a span {
     display: inline;
   }
+
+  /* Full-width call button in mobile hamburger menu */
+  .nav-links.is-open .nav-call-link {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    margin-top: 12px;
+    background: var(--gold, #e6a329);
+    color: #fff !important;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+  }
 }
 
 /* ========== TIPTAP / PROSEMIRROR EDITOR STYLES ========== */
