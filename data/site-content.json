@@ -655,7 +655,7 @@
     },
     "homepage": {
       "pill": "⚡ 24/7 Emergency Locksmith",
-      "heading": " Orlando’s Most <span>Trusted</span> Locksmith rertwertwe",
+      "heading": " Orlando’s Most <span>Trusted</span> Locksmith",
       "heroImage": {
         "src": "/assets/hero-locksmith.png",
         "alt": "Locksmith repairing a door lock at night"
@@ -901,7 +901,8 @@
       ],
       "ctaEyebrow": "Emergency Ready",
       "ctaHeading": "Need a locksmith right now?",
-      "ctaText": "A real technician is ready to help with lockouts, rekeys, car keys, and urgent lock problems across East Orlando."
+      "ctaText": "A real technician is ready to help with lockouts, rekeys, car keys, and urgent lock problems across East Orlando.",
+      "callButtonText": "321 460 0530"
     }
   }
 }
