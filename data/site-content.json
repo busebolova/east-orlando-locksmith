@@ -1,7 +1,7 @@
 {
   "siteName": "East Orlando Locksmith",
-  "phone": "(407) 555-5625",
-  "phoneRaw": "+14075555625",
+  "phone": "(321) 460-0530",
+  "phoneRaw": "+13214600530",
   "address": "Orlando, FL",
   "email": "info@eastorlandolocksmith.com",
   "hours": "24/7 Emergency Service",
@@ -20,8 +20,8 @@
   },
   "adminPassword": "pas12345",
   "maintenanceMode": false,
-  "googleAnalyticsId": "",
-  "googleSearchConsoleVerification": "",
+  "googleAnalyticsId": null,
+  "googleSearchConsoleVerification": null,
   "navigation": {
     "services": [
       {
@@ -640,7 +640,7 @@
   "siteContent": {
     "hero": {
       "title": "Orlando's Most Trusted Locksmith",
-      "subtitle": "24/7 emergency locksmith service across East Orlando — car keys, home lockouts, rekeying, and more. Real dispatch, real people, real fast.",
+      "subtitle": "Local Locksmith Company in East Orlando! Oviedo, Winter Park, Alafaya, Avalon Park, Maitland.",
       "cta": "Call Now"
     },
     "trustSignals": {
