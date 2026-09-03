@@ -1,13 +1,13 @@
 {
-  "siteName": "East Orlando Locksmith",
-  "phone": "(321) 460-0530",
-  "phoneRaw": "+13214600530",
-  "address": "3500 Aloma Ave unit F22, Winter Park, FL 32792",
-  "email": "info@eastorlandolocksmith.com",
-  "hours": "24/7 Emergency Service",
-  "googleRating": "0",
-  "reviewCount": "0",
-  "serviceArea": "East Orlando & Surrounding Areas",
+  "siteName": null,
+  "phone": null,
+  "phoneRaw": null,
+  "address": null,
+  "email": null,
+  "hours": null,
+  "googleRating": null,
+  "reviewCount": null,
+  "serviceArea": null,
   "headerLogo": "",
   "headerLogoWidth": 315,
   "headerLogoHeight": 86,
@@ -20,8 +20,8 @@
   },
   "adminPassword": "Muttimuco2025@",
   "maintenanceMode": false,
-  "googleAnalyticsId": null,
-  "googleSearchConsoleVerification": null,
+  "googleAnalyticsId": "",
+  "googleSearchConsoleVerification": "<meta name=\"google-site-verification\" content=\"zTAP_b57N5qiUCxfLInRY1hUBNn3U5nRXRT3ewf-tlc\" />",
   "navigation": {
     "services": [
       {
@@ -639,9 +639,9 @@
   ],
   "siteContent": {
     "hero": {
-      "title": "Orlando's Most Trusted Locksmith",
-      "subtitle": "Local Locksmith Company in East Orlando! Oviedo, Winter Park, Alafaya, Avalon Park, Maitland.",
-      "cta": "Call Now"
+      "title": null,
+      "subtitle": null,
+      "cta": null
     },
     "trustSignals": {
       "responseTime": "15-30 min",
@@ -650,8 +650,8 @@
       "rating": "5.0"
     },
     "footer": {
-      "description": "Professional 24/7 locksmith service for East Orlando, Winter Park, and surrounding communities. Licensed, insured, and ready when you need us most.\r\n\r\n3500 Aloma Ave unit F22, Winter Park, FL 32792",
-      "copyright": "2026 East Orlando Locksmith. All rights reserved."
+      "description": null,
+      "copyright": null
     },
     "homepage": {
       "pill": "⚡ 24/7 Emergency Locksmith",
